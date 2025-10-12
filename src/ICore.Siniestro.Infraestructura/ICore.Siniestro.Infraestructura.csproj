@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sbins.Tia.Autenticacion.Cliente" Version="1.0.5" />
+  </ItemGroup>
+	<ItemGroup>
+		<RuntimeHostConfigurationOption Include="System.Runtime.Loader.UseRidGraph" Value="true" />
+	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICore.Siniestro.Aplicacion.Contratos\ICore.Siniestro.Aplicacion.Contratos.csproj" />
+    <ProjectReference Include="..\ICore.Siniestro.Aplicacion\ICore.Siniestro.Aplicacion.csproj" />
+    <ProjectReference Include="..\ICore.Siniestro.Infraestructura.TiaCase\ICore.Siniestro.Infraestructura.TiaCase.csproj" />
+    <ProjectReference Include="..\ICore.Siniestro.Infraestructura.TiaClaims\ICore.Siniestro.Infraestructura.TiaClaims.csproj" />
+    <ProjectReference Include="..\ICore.Siniestro.Infraestructura.TiaParty\ICore.Siniestro.Infraestructura.TiaParty.csproj" />
+    <ProjectReference Include="..\ICore.Siniestro.Infraestructura.Tia\ICore.Siniestro.Infraestructura.Tia.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="OpenAPIs\all.json" ClassName="ApiClient" />
+  </ItemGroup>
+
+</Project>

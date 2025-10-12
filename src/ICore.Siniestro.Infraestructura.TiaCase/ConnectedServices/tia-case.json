@@ -1,0 +1,5825 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Case API",
+    "description": "Enterprise RESTful API for Case",
+    "license": {
+      "name": "Sapiens International",
+      "url": "https://sapiens.com/"
+    },
+    "version": "2.9.0-cd20e5f"
+  },
+  "servers": [
+    {
+      "url": "/case/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Bulk API operations endpoint",
+      "description": "Bulk API Operations Controller"
+    },
+    {
+      "name": "Attachment endpoints",
+      "description": "Attachment Controller 7100"
+    },
+    {
+      "name": "Attachment endpoints",
+      "description": "Attachment Me Controller 7100"
+    },
+    {
+      "name": "Case item endpoints",
+      "description": "Case Item Controller"
+    },
+    {
+      "name": "Case task endpoints",
+      "description": "Case Task Controller"
+    },
+    {
+      "name": "Master cases endpoints",
+      "description": "Master Case Controller"
+    },
+    {
+      "name": "User task endpoints",
+      "description": "User Task Controller"
+    }
+  ],
+  "paths": {
+    "/v1/usertasks/user-tasks/{source}/{id}": {
+      "put": {
+        "tags": [
+          "User task endpoints"
+        ],
+        "summary": "Update user task",
+        "operationId": "updateUserTask",
+        "parameters": [
+          {
+            "name": "source",
+            "in": "path",
+            "description": "Which area the task is from",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User task id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Content for user task to update existing one",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserTasksPutPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseUserTasks"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "Get task by id",
+        "operationId": "getTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCaseTask"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "Update task.",
+        "operationId": "updateTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Case task id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Content for case task to update existing one",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseTask"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCaseTask"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "Update only specified fields of case task resource.",
+        "description": "## Case task PATCH example: \n\n```json\n{\n  \"description\": \"Some text about case task\",\n  \"actionId\": \"5\"\n}\n```\n\n",
+        "operationId": "patchCaseTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Fields with values to be updated",
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/usertasks/user-tasks/{source}/{id}": {
+      "put": {
+        "tags": [
+          "User task endpoints"
+        ],
+        "summary": "Update my user task",
+        "operationId": "updateUserTask_1",
+        "parameters": [
+          {
+            "name": "source",
+            "in": "path",
+            "description": "Which area the task is from",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User task id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Content for user task to update existing one",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserTasksPutPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseUserTasks"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/case-items/{id}": {
+      "get": {
+        "tags": [
+          "Case item endpoints"
+        ],
+        "summary": "Get case item by id",
+        "operationId": "getCaseItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCaseItemResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Case item endpoints"
+        ],
+        "summary": "Update case item",
+        "operationId": "updateCaseItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Case item id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Content for case item to update existing one",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseItemResponse"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCaseItemResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/attachments/{id}": {
+      "get": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Get attachment by id",
+        "operationId": "getAttachment_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Attachment id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseAttachmentQuery"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Update attachment. File-content can't be updated.",
+        "operationId": "updateAttachment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Attachment id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Content for attachment to update existing one",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachmentPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseAttachmentQuery"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/attachments/files/{id}": {
+      "put": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Update archive of the attachment.",
+        "operationId": "updateAttachmentFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Attachment file id(Unique id of the attachment file)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Properties for attachment file to update existing one",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArchivePayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseArchive"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/tasks": {
+      "get": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "Get tasks by party, claim or policy",
+        "operationId": "getTasks",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party id to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company case items to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department case items to search for ",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId1",
+            "in": "query",
+            "description": "Case tasks assigned for the user to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "query",
+            "description": "ALL retrieves all tasks,\u003CBR\u003E OPEN retrieves all open tasks,\u003CBR\u003E CLOSED retrieves all closed tasks",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "OPEN",
+              "enum": [
+                "ALL",
+                "CLOSED",
+                "OPEN"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/tasks?sort=id:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseCaseTask"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "Create case task",
+        "operationId": "createTask",
+        "requestBody": {
+          "description": "Content for case task to insert",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseTask"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCaseTask"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/case-master": {
+      "get": {
+        "tags": [
+          "Master cases endpoints"
+        ],
+        "summary": "Get master cases by search parameters",
+        "operationId": "getMasterCases",
+        "parameters": [
+          {
+            "name": "assignedUser",
+            "in": "query",
+            "description": "Assigned user to the case",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workGroupId",
+            "in": "query",
+            "description": "Work group Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "description": "Transaction Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "masterCaseType",
+            "in": "query",
+            "description": "Master case type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "Priority",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseStatus",
+            "in": "query",
+            "description": "Master case status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assignedByUser",
+            "in": "query",
+            "description": "Assigned by User",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Result page you want to retrieve (1..N)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by priority and due date in descending order.\nUsage example: /v1/case-master?sort=priority:desc\"\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseMasterCaseExtended"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Master cases endpoints"
+        ],
+        "summary": "Create the given master case",
+        "operationId": "createMasterCase",
+        "requestBody": {
+          "description": "Content for master case to insert",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MasterCasePayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseMasterCaseExtended"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/case-items": {
+      "get": {
+        "tags": [
+          "Case item endpoints"
+        ],
+        "summary": "Get case items by search parameters",
+        "operationId": "getCaseItems",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party id to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyLineNo",
+            "in": "query",
+            "description": "Policy line number to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "accountNo",
+            "in": "query",
+            "description": "Account no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "paymentNo",
+            "in": "query",
+            "description": "Payment no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "receiverId",
+            "in": "query",
+            "description": "Receiver id to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "caseType",
+            "in": "query",
+            "description": "Case type to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseSubTypes",
+            "in": "query",
+            "description": "Case sub type to search for",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          },
+          {
+            "name": "actionId",
+            "in": "query",
+            "description": "Action id to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company case items to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department case items to search for ",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId1",
+            "in": "query",
+            "description": "Case items assigned for the user to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/case-items?sort=id:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseCaseItemResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Case item endpoints"
+        ],
+        "summary": "Create case item",
+        "operationId": "createCaseItem",
+        "requestBody": {
+          "description": "Content for case item to insert",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCaseItemResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/bulk": {
+      "post": {
+        "tags": [
+          "Bulk API operations endpoint"
+        ],
+        "summary": "API for bulk operations ",
+        "operationId": "performBulkOperations",
+        "requestBody": {
+          "description": "Bulk operations payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkApiRequestPayloadMain"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseBulkApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/attachments": {
+      "get": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Get attachments by search parameters",
+        "operationId": "getAttachments_1",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party id to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "paymentNo",
+            "in": "query",
+            "description": "Account payment no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "description": "Trans Id",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyLineNo",
+            "in": "query",
+            "description": "Policy line number to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start Date in yyyy-MM-dd format to fetch documents having case item writing date greater than or equal to this start date.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End Date in yyyy-MM-dd format to fetch documents having case item writing date less than or equal to this end date.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "Product id to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productLineId",
+            "in": "query",
+            "description": "Product line id to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "documentType",
+            "in": "query",
+            "description": "The program type which produce the print.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/attachments?sort=id:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseAttachmentQuery"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Create attachment without file-content.",
+        "description": " To add file content use POST attachments/{id}/files.",
+        "operationId": "createAttachment",
+        "requestBody": {
+          "description": "Attachment to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachmentPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseAttachmentQuery"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/attachments/{id}/files": {
+      "post": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Assign a file to the attachment.",
+        "operationId": "uploadAttachmentFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the attachment on which the file will be attached",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "String"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "String"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseArchive"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/case-master/{id}": {
+      "get": {
+        "tags": [
+          "Master cases endpoints"
+        ],
+        "summary": "Return master case by id",
+        "operationId": "getMasterCase",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Master case number",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseMasterCaseExtended"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Master cases endpoints"
+        ],
+        "summary": "Update only specified fields of master case resource.",
+        "description": "## Master case PATCH example: \n\n```json\n{\n  \"description\": \"Some text about master case\",\n  \"priority\": \"20\"\n}\n```\n\n",
+        "operationId": "patchMasterCase",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Fields with values to be updated",
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/usertasks/user-tasks": {
+      "get": {
+        "tags": [
+          "User task endpoints"
+        ],
+        "summary": "User task list by search parameters",
+        "operationId": "getTaskList",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimSubcaseNo",
+            "in": "query",
+            "description": "Claim subcase number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "assignedUser",
+            "in": "query",
+            "description": "Assigned user to the task",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company number",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "workGroupId",
+            "in": "query",
+            "description": "Work group Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "query",
+            "description": "Task status. Allowable values:\u003Cbr\u003EOPEN (Default)\u003Cbr\u003ECLOSED\u003Cbr\u003EALL",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseType",
+            "in": "query",
+            "description": "Case Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseSubType",
+            "in": "query",
+            "description": "Case Sub Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "masterCaseNo",
+            "in": "query",
+            "description": "Master Case number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "actionDateFrom",
+            "in": "query",
+            "description": "Search for tasks with action date on or after this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "actionDateTo",
+            "in": "query",
+            "description": "Search for tasks with action date before or on this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "additionalFilters",
+            "in": "query",
+            "description": "Format: (Property name) (Operator name) (Values) (AND) (Property name) (Operator name) (Values).\u003Cbr\u003E\n The Property name field should be in response model class. \u003Cbr\u003EUsage example:\n createDate GT \"2024-01-23T07:35:31.000Z\" AND amount EQ 2293.56 AND itemText LIKE \"01 PET Default\"\n \u003Cbr\u003E Based on the property name datatype, The suitable operator has to be given\n \u003Cbr\u003EString:EQ,NEQ,LIKE,NLIKE,IN,NIN,IS,ISN\n \u003Cbr\u003EBoolean:EQ,NEQ,IS,ISN\n \u003Cbr\u003EOther types:EQ,NEQ,GT,LT,GTE,LTE,IN,NIN,IS,ISN\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/tasks/user-tasks?sort=name:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseUserTasks"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/usertasks/pool-tasks": {
+      "get": {
+        "tags": [
+          "User task endpoints"
+        ],
+        "summary": "Pool task list by search parameters",
+        "operationId": "getPoolTaskList",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimSubcaseNo",
+            "in": "query",
+            "description": "Claim subcase number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "poolUser",
+            "in": "query",
+            "description": "User in assigned department or work group",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company number",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "workGroupId",
+            "in": "query",
+            "description": "Work group Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "query",
+            "description": "Task status. Allowable values:\u003Cbr\u003EOPEN (Default)\u003Cbr\u003ECLOSED\u003Cbr\u003EALL",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseType",
+            "in": "query",
+            "description": "Case Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseSubType",
+            "in": "query",
+            "description": "Case Sub Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "masterCaseNo",
+            "in": "query",
+            "description": "Master Case number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "actionDateFrom",
+            "in": "query",
+            "description": "Search for tasks with action date on or after this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "actionDateTo",
+            "in": "query",
+            "description": "Search for tasks with action date before or on this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "additionalFilters",
+            "in": "query",
+            "description": "Format: (Property name) (Operator name) (Values) (AND) (Property name) (Operator name) (Values).\u003Cbr\u003E\n The Property name field should be in response model class. \u003Cbr\u003EUsage example:\n createDate GT \"2024-01-23T07:35:31.000Z\" AND amount EQ 2293.56 AND itemText LIKE \"01 PET Default\"\n \u003Cbr\u003E Based on the property name datatype, The suitable operator has to be given\n \u003Cbr\u003EString:EQ,NEQ,LIKE,NLIKE,IN,NIN,IS,ISN\n \u003Cbr\u003EBoolean:EQ,NEQ,IS,ISN\n \u003Cbr\u003EOther types:EQ,NEQ,GT,LT,GTE,LTE,IN,NIN,IS,ISN\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/tasks/pool-tasks?sort=name:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponsePoolTasks"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/tasks/metadata": {
+      "get": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "returns links to various metadata to be used when working with task.",
+        "operationId": "getMetadata",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=3600",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataResponseMetaDataLinks"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/usertasks/user-tasks": {
+      "get": {
+        "tags": [
+          "User task endpoints"
+        ],
+        "summary": "Get user tasks assigned to me by search parameters",
+        "operationId": "getMyTaskList",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimSubcaseNo",
+            "in": "query",
+            "description": "Claim subcase number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company number",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "workGroupId",
+            "in": "query",
+            "description": "Work group Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "query",
+            "description": "Task status. Allowable values:\u003Cbr\u003EOPEN (Default)\u003Cbr\u003ECLOSED\u003Cbr\u003EALL",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseType",
+            "in": "query",
+            "description": "Case Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseSubType",
+            "in": "query",
+            "description": "Case Sub Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "masterCaseNo",
+            "in": "query",
+            "description": "Master Case number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "actionDateFrom",
+            "in": "query",
+            "description": "Search for tasks with action date on or after this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "actionDateTo",
+            "in": "query",
+            "description": "Search for tasks with action date before or on this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "additionalFilters",
+            "in": "query",
+            "description": "Format: (Property name) (Operator name) (Values) (AND) (Property name) (Operator name) (Values).\u003Cbr\u003E\n The Property name field should be in response model class. \u003Cbr\u003EUsage example:\n createDate GT \"2024-01-23T07:35:31.000Z\" AND amount EQ 2293.56 AND itemText LIKE \"01 PET Default\"\n \u003Cbr\u003E Based on the property name datatype, The suitable operator has to be given\n \u003Cbr\u003EString:EQ,NEQ,LIKE,NLIKE,IN,NIN,IS,ISN\n \u003Cbr\u003EBoolean:EQ,NEQ,IS,ISN\n \u003Cbr\u003EOther types:EQ,NEQ,GT,LT,GTE,LTE,IN,NIN,IS,ISN\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/me/tasks/user-tasks?sort=name:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseUserTasks"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/usertasks/pool-tasks": {
+      "get": {
+        "tags": [
+          "User task endpoints"
+        ],
+        "summary": "Get my pool tasks by search parameters",
+        "operationId": "getPoolTaskList_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimSubcaseNo",
+            "in": "query",
+            "description": "Claim subcase number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company number",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "workGroupId",
+            "in": "query",
+            "description": "Work group Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "query",
+            "description": "Task status. Allowable values:\u003Cbr\u003EOPEN (Default)\u003Cbr\u003ECLOSED\u003Cbr\u003EALL",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseType",
+            "in": "query",
+            "description": "Case Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caseSubType",
+            "in": "query",
+            "description": "Case Sub Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "masterCaseNo",
+            "in": "query",
+            "description": "Master Case number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "actionDateFrom",
+            "in": "query",
+            "description": "Search for tasks with action date on or after this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "actionDateTo",
+            "in": "query",
+            "description": "Search for tasks with action date before or on this date. Format: yyyy-MM-dd.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "additionalFilters",
+            "in": "query",
+            "description": "Format: (Property name) (Operator name) (Values) (AND) (Property name) (Operator name) (Values).\u003Cbr\u003E\n The Property name field should be in response model class. \u003Cbr\u003EUsage example:\n createDate GT \"2024-01-23T07:35:31.000Z\" AND amount EQ 2293.56 AND itemText LIKE \"01 PET Default\"\n \u003Cbr\u003E Based on the property name datatype, The suitable operator has to be given\n \u003Cbr\u003EString:EQ,NEQ,LIKE,NLIKE,IN,NIN,IS,ISN\n \u003Cbr\u003EBoolean:EQ,NEQ,IS,ISN\n \u003Cbr\u003EOther types:EQ,NEQ,GT,LT,GTE,LTE,IN,NIN,IS,ISN\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/me/tasks/pool-tasks?sort=name:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponsePoolTasks"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/tasks": {
+      "get": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "Get tasks related to yourself by claim or policy",
+        "operationId": "getTasks_1",
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Party id to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "companyNo",
+            "in": "query",
+            "description": "Company case items to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "departmentNo",
+            "in": "query",
+            "description": "Department case items to search for ",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId1",
+            "in": "query",
+            "description": "Case tasks assigned for the user to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "query",
+            "description": "ALL retrieves all tasks,\u003CBR\u003E OPEN retrieves all open tasks,\u003CBR\u003E CLOSED retrieves all closed tasks",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "OPEN",
+              "enum": [
+                "ALL",
+                "CLOSED",
+                "OPEN"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/me/tasks?sort=id:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseCaseTask"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Case task endpoints"
+        ],
+        "summary": "Get task by id",
+        "operationId": "getTask_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCaseTask"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/attachments": {
+      "get": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Get own attachments by search parameters",
+        "operationId": "getAttachments",
+        "parameters": [
+          {
+            "name": "policyNo",
+            "in": "query",
+            "description": "Policy no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "claimNo",
+            "in": "query",
+            "description": "Claim no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "paymentNo",
+            "in": "query",
+            "description": "Account payment no to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "query",
+            "description": "Trans Id",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "policyLineNo",
+            "in": "query",
+            "description": "Policy line number to search for",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start Date in yyyy-MM-dd format to fetch documents having case item writing date greater than or equal to this start date.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End Date in yyyy-MM-dd format to fetch documents having case item writing date less than or equal to this end date.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "Product id to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productLineId",
+            "in": "query",
+            "description": "Product line id to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "documentType",
+            "in": "query",
+            "description": "The program type which produce the print.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Format: property(:asc|desc). Default order is ascending.\nIf no sort parameter is provided, data is sorted by id in ascending order.\nUsage example: /v1/me/attachments?sort=id:desc\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseAttachmentQuery"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/attachments/{id}": {
+      "get": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Get own attachment by id",
+        "operationId": "getAttachment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Attachment id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseAttachmentQuery"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/me/attachments/{attachmentId}/archives/{archiveId}/file": {
+      "get": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Get file associated with own attachment.",
+        "description": "Content type returned depends on the 'Accept' header in the request. If the client can accept the content type associated with the file then the file mime-type is used in the response otherwise  application/octet-stream is used. If the content type is accepted the file is returned as 'inline' otherwise as an 'attachment'. The acceptance of the content type is based on compatibility. E.g. image/* is compatible with image/jpeg, image/png, etc. Media type parameters are ignored. ",
+        "operationId": "getAttachmentFile",
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "Attachment Id (Case item, that contains attachment files)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "archiveId",
+            "in": "path",
+            "description": "Archive Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Accept",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "String"
+                }
+              },
+              "Content-Disposition": {
+                "description": "inline/attachment and filename information",
+                "style": "simple",
+                "schema": {
+                  "type": "String"
+                }
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/attachments/{attachmentId}/archives/{archiveId}/file": {
+      "get": {
+        "tags": [
+          "Attachment endpoints"
+        ],
+        "summary": "Get file associated with attachment.",
+        "description": "Content type returned depends on the 'Accept' header in the request. If the client can accept the content type associated with the file then the file mime-type is used in the response otherwise  application/octet-stream is used. If the content type is accepted the file is returned as 'inline' otherwise as an 'attachment'. The acceptance of the content type is based on compatibility. E.g. image/* is compatible with image/jpeg, image/png, etc. Media type parameters are ignored. ",
+        "operationId": "getAttachmentFile_1",
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "Attachment Id (Case item, that contains attachment files)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "archiveId",
+            "in": "path",
+            "description": "Archive id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Accept",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "String"
+                }
+              },
+              "Content-Disposition": {
+                "description": "inline/attachment and filename information",
+                "style": "simple",
+                "schema": {
+                  "type": "String"
+                }
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Archive": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "attachmentId": {
+            "type": "integer",
+            "description": "Request_id of case which attachment relates to (print_request number is used).",
+            "format": "int64"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Sequence number of attachment within a case.",
+            "format": "int64"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The name of the file where the attachment is stored."
+          },
+          "sensitiveFaCode": {
+            "type": "integer",
+            "description": "Required functional authorization code to access attachment file",
+            "format": "int64"
+          },
+          "archiveDate": {
+            "type": "string",
+            "description": "Date and time when attachment was added",
+            "format": "date-time"
+          },
+          "doNotDelete": {
+            "type": "boolean",
+            "description": "Do not delete"
+          },
+          "obsolete": {
+            "type": "boolean",
+            "description": "Obsolete"
+          },
+          "attachmentDescription": {
+            "type": "string",
+            "description": "Description of this attachment."
+          },
+          "reprintable": {
+            "type": "string",
+            "description": "Indicator, which used to identify if document is reprintable"
+          }
+        },
+        "description": "Model documentation for Archive"
+      },
+      "ArchivePayload": {
+        "type": "object",
+        "properties": {
+          "sensitiveFaCode": {
+            "type": "integer",
+            "description": "Required functional authorization code to access attachment file",
+            "format": "int64",
+            "example": 40
+          },
+          "doNotDelete": {
+            "type": "boolean",
+            "description": "Do not delete"
+          },
+          "obsolete": {
+            "type": "boolean",
+            "description": "Obsolete",
+            "default": false
+          }
+        },
+        "description": "Model documentation for Attachment archive Request body"
+      },
+      "AttachmentPayload": {
+        "required": [
+          "partyId"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "The name of the file where the letter is stored"
+          },
+          "date": {
+            "type": "string",
+            "description": "The date the letter was sent",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the letter sent",
+            "example": "Accept note"
+          },
+          "partyId": {
+            "type": "integer",
+            "description": "Id of customer or partner whereto event refers",
+            "format": "int64"
+          },
+          "policyNo": {
+            "type": "integer",
+            "description": "Policy no whereto this attachment refers",
+            "format": "int64"
+          },
+          "claimNo": {
+            "type": "integer",
+            "description": "Claims Number, whereto this event refers",
+            "format": "int64"
+          },
+          "caseType": {
+            "type": "string",
+            "description": "The type of next action for the attachment. See operation tasks/metadata for further information"
+          },
+          "caseSubType": {
+            "type": "string",
+            "description": "Used for grouping attachments. See operation tasks/metadata for further information"
+          },
+          "userComment": {
+            "type": "string",
+            "description": "Internal comment from the user regarding this attachment"
+          },
+          "receiverId": {
+            "type": "integer",
+            "description": "Party ID of document sender/receiver.",
+            "format": "int64"
+          },
+          "accountNo": {
+            "type": "integer",
+            "description": "Account number related to attached documents.",
+            "format": "int64"
+          },
+          "paymentNo": {
+            "type": "integer",
+            "description": "Account payment number",
+            "format": "int64"
+          }
+        },
+        "description": "Model documentation for Attachment Request body"
+      },
+      "AttachmentQuery": {
+        "required": [
+          "id",
+          "partyId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "A unique identification of a print request",
+            "format": "int64",
+            "readOnly": true
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The name of the file where the letter is stored"
+          },
+          "date": {
+            "type": "string",
+            "description": "The date the letter was sent",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the letter sent",
+            "example": "Accept note"
+          },
+          "partyId": {
+            "type": "integer",
+            "description": "Id of customer or partner whereto event refers",
+            "format": "int64"
+          },
+          "policyNo": {
+            "type": "integer",
+            "description": "Policy no whereto this attachment refers",
+            "format": "int64"
+          },
+          "claimNo": {
+            "type": "integer",
+            "description": "Claims Number, whereto this event refers",
+            "format": "int64"
+          },
+          "caseType": {
+            "type": "string",
+            "description": "The type of next action for the attachment. See operation tasks/metadata for further information"
+          },
+          "caseSubType": {
+            "type": "string",
+            "description": "Used for grouping attachments. See operation tasks/metadata for further information"
+          },
+          "userComment": {
+            "type": "string",
+            "description": "Internal comment from the user regarding this attachment"
+          },
+          "receiverId": {
+            "type": "integer",
+            "description": "Party ID of document sender/receiver.",
+            "format": "int64"
+          },
+          "accountNo": {
+            "type": "integer",
+            "description": "Account number to which event refers.",
+            "format": "int64"
+          },
+          "paymentNo": {
+            "type": "integer",
+            "description": "Account payment number",
+            "format": "int64"
+          },
+          "transaction": {
+            "type": "string",
+            "description": "Transaction description",
+            "example": "New Policy Line"
+          },
+          "emailTo": {
+            "type": "string",
+            "description": "Receiver email address",
+            "example": "john@company.com"
+          },
+          "emailFrom": {
+            "type": "string",
+            "description": "Sender email address",
+            "example": "Joe@insurrance.com"
+          },
+          "emailCc": {
+            "type": "string",
+            "description": "CC email address",
+            "example": "jane@company.com"
+          },
+          "emailBcc": {
+            "type": "string",
+            "description": "BCC email address",
+            "example": "jill@company.com"
+          },
+          "emailSubject": {
+            "type": "string",
+            "description": "Email subject",
+            "example": "You policy documents"
+          },
+          "emailMessage": {
+            "type": "string",
+            "description": "This is the text in the actual email. So if any message for the receiver should be added it is here.",
+            "example": "Dear Joe Smith. This is your new policy."
+          },
+          "addressee": {
+            "type": "string",
+            "description": "Receiver of letter",
+            "example": "Smiths and Co., Highstreet 42, Anywhere"
+          },
+          "postArea": {
+            "type": "string",
+            "description": "Post area of receiver",
+            "example": "A234"
+          },
+          "letterSalut": {
+            "type": "string",
+            "description": "The salutation to be used in the  letter.",
+            "example": "Regards"
+          },
+          "postStreet": {
+            "type": "string",
+            "description": "Post street of receiver",
+            "example": "Main"
+          },
+          "productId": {
+            "type": "string",
+            "description": "Product identification.",
+            "example": "B1"
+          },
+          "productDescription": {
+            "type": "string",
+            "description": "Product description.",
+            "example": "Pet Insurance"
+          },
+          "productLineId": {
+            "type": "string",
+            "description": "Base key for the product line identification.",
+            "example": "PET"
+          },
+          "documentType": {
+            "type": "string",
+            "description": "The program which produce the print.",
+            "example": "RESTO"
+          },
+          "productLineDescription": {
+            "type": "string",
+            "description": "Description of the product line",
+            "example": "Pet Insurance"
+          },
+          "policyLineShortDesc": {
+            "type": "string",
+            "description": "Short description of this policy line cover extracted from the first object connected.",
+            "example": "5031669BW"
+          },
+          "transactionId": {
+            "type": "integer",
+            "description": "All print for same transaction is grouped together  with transid.",
+            "format": "int64",
+            "example": 4234432
+          },
+          "policyLineNo": {
+            "type": "integer",
+            "description": "Agreement line no.",
+            "format": "int64",
+            "example": 5031941
+          },
+          "archives": {
+            "type": "array",
+            "description": "Associated archives",
+            "items": {
+              "$ref": "#/components/schemas/Archive"
+            }
+          }
+        },
+        "description": "Model documentation for Attachment Response body"
+      },
+      "BulkApiOperationRequestPayload": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Operation Id, is useful to identify the response of this operation in the entire bulk operations response. Recommended to be unique."
+          },
+          "method": {
+            "type": "string",
+            "description": "HTTP request method, the supported request methods are POST, PUT, PATCH, and DELETE."
+          },
+          "path": {
+            "type": "string",
+            "description": "Path, it should be the same URI on individual REST endpoint which is given in the REST documentation."
+          },
+          "pathParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "description": "Path Parameters, are key value pairs. Value to the path variables available in the individual endpoint URI should be given here."
+            },
+            "description": "Path Parameters, are key value pairs. Value to the path variables available in the individual endpoint URI should be given here."
+          },
+          "payload": {
+            "$ref": "#/components/schemas/JsonNode"
+          }
+        },
+        "description": "Model documentation for Bulk API operation payload."
+      },
+      "BulkApiOperationResponse": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Operation id, which is the same operation id given on individual operation in the request payload."
+          },
+          "response": {
+            "type": "object",
+            "description": "Individual operation response."
+          },
+          "statusCode": {
+            "type": "integer",
+            "description": "Http status code.",
+            "format": "int32"
+          },
+          "etag": {
+            "type": "string"
+          }
+        },
+        "description": "Model documentation for Bulk API operation response."
+      },
+      "BulkApiRequestPayloadMain": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "description": "List of operations.",
+            "items": {
+              "$ref": "#/components/schemas/BulkApiOperationRequestPayload"
+            }
+          }
+        },
+        "description": "Model documentation for Bulk API operations payload."
+      },
+      "BulkApiResponse": {
+        "type": "object",
+        "properties": {
+          "successfulOperationCount": {
+            "type": "integer",
+            "description": "Successful operations count.",
+            "format": "int32"
+          },
+          "unsuccessfulOperationCount": {
+            "type": "integer",
+            "description": "Unsuccessful operations count.",
+            "format": "int32"
+          },
+          "operations": {
+            "type": "array",
+            "description": "Bulk operation response.",
+            "items": {
+              "$ref": "#/components/schemas/BulkApiOperationResponse"
+            }
+          }
+        },
+        "description": "Model documentation for Bulk API operations response."
+      },
+      "CaseItemRequest": {
+        "type": "object",
+        "properties": {
+          "partyId": {
+            "type": "integer",
+            "description": "Id of related party",
+            "format": "int64"
+          },
+          "policyNo": {
+            "type": "integer",
+            "description": "Number of related policy",
+            "format": "int64"
+          },
+          "claimNo": {
+            "type": "integer",
+            "description": "Number of related claim case",
+            "format": "int64"
+          },
+          "companyNo": {
+            "type": "integer",
+            "description": "Action required by this company.",
+            "format": "int64"
+          },
+          "departmentNo": {
+            "type": "string",
+            "description": "Action required by this department. Should be provided together with companyNo."
+          },
+          "actionDate": {
+            "type": "string",
+            "description": "Action date",
+            "format": "date-time"
+          },
+          "completionDate": {
+            "type": "string",
+            "description": "Completion date",
+            "format": "date-time"
+          },
+          "actionId": {
+            "maximum": 999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Next action for the case item",
+            "format": "int64"
+          },
+          "caseType": {
+            "type": "string",
+            "description": "Type of next action for the case"
+          },
+          "userId1": {
+            "type": "string",
+            "description": "Action required by this user"
+          },
+          "userComment": {
+            "type": "string",
+            "description": "Internal comment from the user regarding this case item"
+          },
+          "subCaseNo": {
+            "type": "integer",
+            "description": "Reference to a single specific sub case",
+            "format": "int64"
+          },
+          "complaintNo": {
+            "type": "integer",
+            "description": "Complaint number",
+            "format": "int64"
+          },
+          "supplierCaseId": {
+            "type": "integer",
+            "description": "Unique identification of a service supplier case. The number is generated by the system and is used as a reference to a single specific service supplier case.",
+            "format": "int64"
+          },
+          "accountNo": {
+            "type": "integer",
+            "description": "Account number",
+            "format": "int64"
+          },
+          "paymentNo": {
+            "type": "integer",
+            "description": "Payment number",
+            "format": "int64"
+          },
+          "etransNo": {
+            "type": "integer",
+            "description": "Etrans number. Id used by the country layer interface.",
+            "format": "int64"
+          },
+          "workGroupId": {
+            "type": "string",
+            "description": "Supported since Enterprise 7.7.0 (will be ignored for older ones). Id for the work group"
+          },
+          "caseSubType": {
+            "type": "string",
+            "description": "Sub type used for grouping cases"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The name/path of the file where the document is stored"
+          },
+          "receiverName": {
+            "type": "string",
+            "description": "The person to whom the document is sent to"
+          },
+          "reminderNo": {
+            "type": "integer",
+            "description": "Link to reminder system",
+            "format": "int64"
+          },
+          "programId": {
+            "type": "string",
+            "description": "Identifies a standard letter mask"
+          },
+          "receiverId": {
+            "type": "integer",
+            "description": "Party ID of document sender/receiver",
+            "format": "int64"
+          },
+          "policyLineNo": {
+            "type": "integer",
+            "description": "Identification of policy line no",
+            "format": "int64"
+          },
+          "objectNo": {
+            "type": "integer",
+            "description": "Identification of a object. This is a reference to a specific insured object",
+            "format": "int64"
+          },
+          "emailTo": {
+            "type": "string",
+            "description": "Email to"
+          },
+          "emailFrom": {
+            "type": "string",
+            "description": "Email from"
+          },
+          "emailCc": {
+            "type": "string",
+            "description": "Email cc"
+          },
+          "emailBcc": {
+            "type": "string",
+            "description": "Email bcc"
+          },
+          "emailSubject": {
+            "type": "string",
+            "description": "Email subject"
+          },
+          "emailMessage": {
+            "type": "string",
+            "description": "Email message"
+          },
+          "visible": {
+            "type": "boolean",
+            "description": "Record visibility flag."
+          },
+          "requestUser": {
+            "type": "string",
+            "description": "User who requested the print job, if this case item is based on a print job"
+          },
+          "workpadNo": {
+            "type": "integer",
+            "description": "Number or related work pad",
+            "format": "int64"
+          },
+          "claimItemNo": {
+            "type": "integer",
+            "description": "Number of related claim item",
+            "format": "int64"
+          },
+          "longitude": {
+            "type": "integer",
+            "description": "Users geographic coordinate longitude",
+            "format": "int64"
+          },
+          "latitude": {
+            "type": "integer",
+            "description": "Users geographic coordinate latitude",
+            "format": "int64"
+          },
+          "eventName": {
+            "type": "integer",
+            "description": "Event name, that triggered task",
+            "format": "int64"
+          },
+          "documentLocation": {
+            "type": "string",
+            "description": "Location where the document is stored. Values: DELETED, DISK, NONE, NOT STORED, TAPE NOTES"
+          },
+          "writingDate": {
+            "type": "string",
+            "description": "Date the document was sent",
+            "format": "date-time"
+          }
+        },
+        "description": "Model documentation for Case item request"
+      },
+      "CaseItemResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique key for case item",
+            "format": "int64"
+          },
+          "partyId": {
+            "type": "integer",
+            "description": "Id of related party",
+            "format": "int64"
+          },
+          "policyNo": {
+            "type": "integer",
+            "description": "Number of related policy",
+            "format": "int64"
+          },
+          "claimNo": {
+            "type": "integer",
+            "description": "Number of related claim case",
+            "format": "int64"
+          },
+          "companyNo": {
+            "type": "integer",
+            "description": "Action required by this company.",
+            "format": "int64"
+          },
+          "departmentNo": {
+            "type": "string",
+            "description": "Action required by this department. Should be provided together with companyNo."
+          },
+          "actionDate": {
+            "type": "string",
+            "description": "Action date",
+            "format": "date-time"
+          },
+          "completionDate": {
+            "type": "string",
+            "description": "Completion date",
+            "format": "date-time"
+          },
+          "actionId": {
+            "maximum": 999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Next action for the case item",
+            "format": "int64"
+          },
+          "caseType": {
+            "type": "string",
+            "description": "Type of next action for the case"
+          },
+          "userId1": {
+            "type": "string",
+            "description": "Action required by this user"
+          },
+          "userComment": {
+            "type": "string",
+            "description": "Internal comment from the user regarding this case item"
+          },
+          "subCaseNo": {
+            "type": "integer",
+            "description": "Reference to a single specific sub case",
+            "format": "int64"
+          },
+          "complaintNo": {
+            "type": "integer",
+            "description": "Complaint number",
+            "format": "int64"
+          },
+          "supplierCaseId": {
+            "type": "integer",
+            "description": "Unique identification of a service supplier case. The number is generated by the system and is used as a reference to a single specific service supplier case.",
+            "format": "int64"
+          },
+          "accountNo": {
+            "type": "integer",
+            "description": "Account number",
+            "format": "int64"
+          },
+          "paymentNo": {
+            "type": "integer",
+            "description": "Payment number",
+            "format": "int64"
+          },
+          "etransNo": {
+            "type": "integer",
+            "description": "Etrans number. Id used by the country layer interface.",
+            "format": "int64"
+          },
+          "workGroupId": {
+            "type": "string",
+            "description": "Supported since Enterprise 7.7.0 (will be ignored for older ones). Id for the work group"
+          },
+          "caseSubType": {
+            "type": "string",
+            "description": "Sub type used for grouping cases"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The name/path of the file where the document is stored"
+          },
+          "receiverName": {
+            "type": "string",
+            "description": "The person to whom the document is sent to"
+          },
+          "reminderNo": {
+            "type": "integer",
+            "description": "Link to reminder system",
+            "format": "int64"
+          },
+          "programId": {
+            "type": "string",
+            "description": "Identifies a standard letter mask"
+          },
+          "receiverId": {
+            "type": "integer",
+            "description": "Party ID of document sender/receiver",
+            "format": "int64"
+          },
+          "policyLineNo": {
+            "type": "integer",
+            "description": "Identification of policy line no",
+            "format": "int64"
+          },
+          "objectNo": {
+            "type": "integer",
+            "description": "Identification of a object. This is a reference to a specific insured object",
+            "format": "int64"
+          },
+          "emailTo": {
+            "type": "string",
+            "description": "Email to"
+          },
+          "emailFrom": {
+            "type": "string",
+            "description": "Email from"
+          },
+          "emailCc": {
+            "type": "string",
+            "description": "Email cc"
+          },
+          "emailBcc": {
+            "type": "string",
+            "description": "Email bcc"
+          },
+          "emailSubject": {
+            "type": "string",
+            "description": "Email subject"
+          },
+          "emailMessage": {
+            "type": "string",
+            "description": "Email message"
+          },
+          "visible": {
+            "type": "boolean",
+            "description": "Record visibility flag."
+          },
+          "requestUser": {
+            "type": "string",
+            "description": "User who requested the print job, if this case item is based on a print job"
+          },
+          "workpadNo": {
+            "type": "integer",
+            "description": "Number or related work pad",
+            "format": "int64"
+          },
+          "claimItemNo": {
+            "type": "integer",
+            "description": "Number of related claim item",
+            "format": "int64"
+          },
+          "longitude": {
+            "type": "integer",
+            "description": "Users geographic coordinate longitude",
+            "format": "int64"
+          },
+          "latitude": {
+            "type": "integer",
+            "description": "Users geographic coordinate latitude",
+            "format": "int64"
+          },
+          "eventName": {
+            "type": "integer",
+            "description": "Event name, that triggered task",
+            "format": "int64"
+          },
+          "documentLocation": {
+            "type": "string",
+            "description": "Location where the document is stored. Values: DELETED, DISK, NONE, NOT STORED, TAPE NOTES"
+          },
+          "writingDate": {
+            "type": "string",
+            "description": "Date the document was sent",
+            "format": "date-time"
+          }
+        },
+        "description": "Model documentation for Case item"
+      },
+      "CaseTask": {
+        "required": [
+          "actionId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique key for task",
+            "format": "int64"
+          },
+          "partyId": {
+            "type": "integer",
+            "description": " Id of customer or partner whereto event refers",
+            "format": "int64"
+          },
+          "policyNo": {
+            "type": "integer",
+            "description": "Policy no whereto this task refers",
+            "format": "int64"
+          },
+          "claimNo": {
+            "type": "integer",
+            "description": "Claims Number, whereto this event refers",
+            "format": "int64"
+          },
+          "companyNo": {
+            "type": "integer",
+            "description": "Action required by this company. Company number as stated in COMP_COMPLAINT.comp_no",
+            "format": "int64"
+          },
+          "departmentNo": {
+            "type": "string",
+            "description": "Action required by this department. Department number as stated in DEPARTMENT.dept_no and company_no matches the specified one"
+          },
+          "actionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actionId": {
+            "maximum": 999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "The type of next action for the case. Value must be equal to or larger than 0. See operation tasks/metadata for further information",
+            "format": "int64"
+          },
+          "caseType": {
+            "type": "string",
+            "description": "The type of next action for the case. See operation tasks/metadata for further information"
+          },
+          "userId1": {
+            "type": "string",
+            "description": "Action required by this user. User_id must be as stated in TOP_USER.user_id"
+          },
+          "userComment": {
+            "type": "string",
+            "description": "Internal comment from the user regarding this case-item"
+          },
+          "subCaseNo": {
+            "type": "integer",
+            "description": "Reference to a single specific sub-case",
+            "format": "int64"
+          },
+          "complaintNo": {
+            "type": "integer",
+            "description": "Complaint number",
+            "format": "int64"
+          },
+          "supplierCaseId": {
+            "type": "integer",
+            "description": "Unique identification of a service supplier case. The number is generated by the system and is used as reference to a single specific service supplier case",
+            "format": "int64"
+          },
+          "accountNo": {
+            "type": "integer",
+            "description": "Account number",
+            "format": "int64"
+          },
+          "paymentNo": {
+            "type": "integer",
+            "description": "Payment number",
+            "format": "int64"
+          },
+          "etransNo": {
+            "type": "integer",
+            "description": "Etrans number. Id used by the country layer interface",
+            "format": "int64"
+          },
+          "workGroupId": {
+            "type": "string",
+            "description": "Supported since Enterprise 7.7.0 (will be ignored for older versions). Id for the Work Group. See operation tasks/metadata for further information"
+          },
+          "caseMasterNo": {
+            "type": "integer",
+            "description": "Supported since Enterprise 7.11.0 (will be ignored for older versions). Key to related master case",
+            "format": "int64"
+          },
+          "caseSubType": {
+            "type": "string",
+            "description": "Used for grouping cases. See operation tasks/metadata for further information"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "description": "Model documentation for Case Task"
+      },
+      "JsonNode": {
+        "type": "object",
+        "description": "Payload."
+      },
+      "MasterCaseExtended": {
+        "required": [
+          "caseNo"
+        ],
+        "type": "object",
+        "properties": {
+          "caseNo": {
+            "type": "integer",
+            "description": "A unique identification of the master case.",
+            "format": "int64"
+          },
+          "assignedUser": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this user.",
+            "example": "PPM"
+          },
+          "userName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Assigned user name.",
+            "example": "Luke Skywalker"
+          },
+          "partyId": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Id of customer or partner whereto this case refers.",
+            "format": "int64",
+            "example": 45802
+          },
+          "partyIdAlt": {
+            "type": "string",
+            "description": "Alternative identification of the Party. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case.",
+            "example": "T45802"
+          },
+          "name": {
+            "type": "string",
+            "description": "Constructed from forename, middlename and surname, to be used for internal displays. This maximum length must be kept for compatibility reasons.",
+            "example": "Luke Skywalker"
+          },
+          "forename": {
+            "type": "string",
+            "description": "Forename or first name. Not used for Company Names.",
+            "example": "Luke"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Surname or company name",
+            "example": "Skywalker"
+          },
+          "policyNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Policy no where to this case refers.",
+            "format": "int64",
+            "example": 97721
+          },
+          "policyNoAlt": {
+            "type": "string",
+            "description": "Alternative identification of the policy.",
+            "example": "P97721"
+          },
+          "productId": {
+            "maxLength": 2,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of product.",
+            "example": "G3"
+          },
+          "workGroupId": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this work group.",
+            "example": "GRP1"
+          },
+          "workGroupDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Work group description",
+            "example": "Group 1"
+          },
+          "transactionId": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Policy transaction id.",
+            "format": "int64",
+            "example": 62644
+          },
+          "dueDate": {
+            "type": "string",
+            "description": "Deadline for finishing the tasks on the case.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "priority": {
+            "maxLength": 3,
+            "minLength": 0,
+            "type": "string",
+            "description": "SLA priority, e.g. 10 (Low), 20 (Medium), 30 (High).  Numerical code, matching one of the values defined in the CASE_MASTER_PRIORITY reference table.",
+            "example": "10"
+          },
+          "priorityDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Priority description",
+            "example": "Low"
+          },
+          "description": {
+            "maxLength": 4000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Case description.",
+            "example": "Master case description"
+          },
+          "assignedByUser": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The user who last assigned the case to someone.",
+            "example": "TIA"
+          },
+          "assignedByUserName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "User name who last assigned the case to someone.",
+            "example": "Kylo Ren"
+          },
+          "assignmentDate": {
+            "type": "string",
+            "description": "The date when the case was last assigned to someone.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "masterCaseType": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Master Case type, e.g. POL, MTA, REN. Code, matching one of the values defined in the CASE_MASTER_TYPE reference table.",
+            "example": "MTA"
+          },
+          "masterCaseTypeDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Master Case type description",
+            "example": "Mid-term Adjustment"
+          },
+          "caseStatus": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Case status, e.g. OP (Open) or CL (Closed).  Code, matching one of the values defined in the CASE_MASTER_STATUS reference table.",
+            "example": "OP"
+          },
+          "caseStatusDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Case status description",
+            "example": "Open"
+          },
+          "companyNo": {
+            "maximum": 99999,
+            "type": "integer",
+            "description": "The case is assigned to a department in this company.",
+            "format": "int64",
+            "example": 1
+          },
+          "companyNoDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Company name.",
+            "example": "TIA Technology"
+          },
+          "departmentNo": {
+            "maxLength": 6,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this department.",
+            "example": "1"
+          },
+          "departmentNoDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Department name.",
+            "example": "IT Department"
+          },
+          "siteId": {
+            "type": "integer",
+            "description": "The id of the site",
+            "format": "int64",
+            "example": 1
+          },
+          "recordTimestamp": {
+            "type": "string",
+            "description": "Date and Time for last insert/update of the record updated by system.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "recordUserId": {
+            "type": "string",
+            "description": "Identification of the User who last inserted or updated record updated by system.",
+            "example": "TIA"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Date and Time for last insert/update of the record.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "userId": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "Identification of the user who inserted or modified the record.",
+            "example": "TIA"
+          }
+        },
+        "description": "Holds master cases, each linked to a set of tasks."
+      },
+      "MasterCasePayload": {
+        "required": [
+          "assignmentDate",
+          "caseStatus",
+          "dueDate",
+          "masterCaseType",
+          "partyId",
+          "policyNo",
+          "priority"
+        ],
+        "type": "object",
+        "properties": {
+          "assignedUser": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this user.",
+            "example": "PPM"
+          },
+          "partyId": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Id of customer or partner whereto this case refers.",
+            "format": "int64",
+            "example": 45802
+          },
+          "policyNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Policy no where to this case refers.",
+            "format": "int64",
+            "example": 97721
+          },
+          "workGroupId": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this work group.",
+            "example": "GRP1"
+          },
+          "transactionId": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Policy transaction id.",
+            "format": "int64",
+            "example": 62644
+          },
+          "dueDate": {
+            "type": "string",
+            "description": "Deadline for finishing the tasks on the case.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "priority": {
+            "maxLength": 3,
+            "minLength": 0,
+            "type": "string",
+            "description": "SLA priority, e.g. 10 (Low), 20 (Medium), 30 (High).  Numerical code, matching one of the values defined in the CASE_MASTER_PRIORITY reference table.",
+            "example": "10"
+          },
+          "description": {
+            "maxLength": 4000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Case description.",
+            "example": "Master case description"
+          },
+          "assignedByUser": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The user who last assigned the case to someone.",
+            "example": "TIA"
+          },
+          "assignmentDate": {
+            "type": "string",
+            "description": "The date when the case was last assigned to someone.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "masterCaseType": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Master Case type, e.g. POL, MTA, REN. Code, matching one of the values defined in the CASE_MASTER_TYPE reference table.",
+            "example": "MTA"
+          },
+          "caseStatus": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Case status, e.g. OP (Open) or CL (Closed).  Code, matching one of the values defined in the CASE_MASTER_STATUS reference table.",
+            "example": "OP"
+          },
+          "companyNo": {
+            "maximum": 99999,
+            "type": "integer",
+            "description": "The case is assigned to a department in this company.",
+            "format": "int64",
+            "example": 1
+          },
+          "departmentNo": {
+            "maxLength": 6,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this department.",
+            "example": "1"
+          }
+        },
+        "description": "Model documentation for Master Case Payload"
+      },
+      "MessageResponse": {
+        "type": "object",
+        "properties": {
+          "messageCode": {
+            "type": "string"
+          },
+          "messageText": {
+            "type": "string"
+          }
+        },
+        "description": "Informational or warning messages"
+      },
+      "MetaDataLinks": {
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "string"
+          },
+          "caseTypes": {
+            "type": "string"
+          },
+          "caseSubTypes": {
+            "type": "string"
+          },
+          "workGroups": {
+            "type": "string"
+          }
+        }
+      },
+      "MetadataResponseMetaDataLinks": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/MetaDataLinks"
+          }
+        }
+      },
+      "PageInfo": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PageResponseAttachmentQuery": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentQuery"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PageResponseCaseItemResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CaseItemResponse"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PageResponseCaseTask": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CaseTask"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PageResponseMasterCaseExtended": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MasterCaseExtended"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PageResponsePoolTasks": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PoolTasks"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PageResponseUserTasks": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserTasks"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PoolTasks": {
+        "type": "object",
+        "properties": {
+          "masterCaseNo": {
+            "type": "integer",
+            "description": "A unique identification of the master case.",
+            "format": "int64",
+            "example": 4580243232
+          },
+          "entityId": {
+            "type": "integer",
+            "description": "A unique identification of entity.",
+            "format": "int64",
+            "example": 4580243232
+          },
+          "source": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "Source shows which area the task comes from.\u003Cp\u003ECASE: case item\u003Cp\u003ECLAIM: claim task\u003Cp\u003ESUBCLAIM: subclaim task\u003Cp\u003ESSU: service supplier task\u003Cp\u003ECOMP: complaint task.",
+            "example": "CASE"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Id comes from different columns in underlying table depending on the source (which means it's not unique here).\u003Cp\u003ECASE: case_item.request_id\u003Cp\u003ECLAIM: cla_tasklist.seq_no\u003Cp\u003ESUBCLAIM: cla_tasklist.seq_no\u003Cp\u003ESSU: ssu_ser_sup_case_tasklist.uix_seq_no\u003Cp\u003ECOMP: comp_tasklist.seq_no.",
+            "format": "int64"
+          },
+          "taskStatus": {
+            "maxLength": 6,
+            "minLength": 0,
+            "type": "string",
+            "description": "Status of the task. This is either OPEN or CLOSED.\u003Cp\u003ETasks from CASE_ITEM table are open, if action_id \u003E 0, otherwise CLOSED.\u003Cp\u003ETasks from other tables are open, if completion_date is empty, otherwise CLOSED.",
+            "example": "OPEN"
+          },
+          "taskCode": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Task code"
+          },
+          "taskDesc": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Task description.",
+            "example": "Task description"
+          },
+          "actionDate": {
+            "type": "string",
+            "description": "Action date",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "partyId": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Id of customer or partner whereto this case refers.",
+            "format": "int64",
+            "example": 45802
+          },
+          "partyIdAlt": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "Alternative identification of the Party. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case.",
+            "example": "T45802"
+          },
+          "name": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Constructed from forename, middlename and surname, to be used for internal displays. This maximum length must be kept for compatibility reasons.",
+            "example": "Luke Skywalker"
+          },
+          "forename": {
+            "maxLength": 70,
+            "minLength": 0,
+            "type": "string",
+            "description": "Forename or first name. Not used for Company Names.",
+            "example": "Luke"
+          },
+          "surname": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string",
+            "description": "Surname or company name",
+            "example": "Skywalker"
+          },
+          "poolUser": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The task is assigned to this users department or work group.",
+            "example": "PPM"
+          },
+          "poolUserName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Pool users name.",
+            "example": "Luke Skywalker"
+          },
+          "policyNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Policy no where to this case refers.",
+            "format": "int64",
+            "example": 97721
+          },
+          "policyNoAlt": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "Alternative identification of the policy.",
+            "example": "P97721"
+          },
+          "claimNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Identification of a claim",
+            "format": "int64",
+            "example": 1722
+          },
+          "claimNoAlt": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "Alternative identification of the claim.",
+            "example": "C1722"
+          },
+          "claimSubcaseNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Identification of a claim subcase.",
+            "format": "int64",
+            "example": 2614
+          },
+          "workGroupId": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this work group.",
+            "example": "GRP1"
+          },
+          "workGroupDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Work group description",
+            "example": "Group 1"
+          },
+          "departmentNo": {
+            "maxLength": 6,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this department.",
+            "example": "1"
+          },
+          "departmentNoDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Department name.",
+            "example": "IT Department"
+          },
+          "companyNo": {
+            "maximum": 99999,
+            "type": "integer",
+            "description": "The case is assigned to a department in this company.",
+            "format": "int64",
+            "example": 1
+          },
+          "companyNoDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Company name.",
+            "example": "TIA Technology"
+          },
+          "description": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the task.",
+            "example": "Description"
+          },
+          "comments": {
+            "maxLength": 4000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Task comments.",
+            "example": "Various comments"
+          },
+          "objectNo": {
+            "type": "integer",
+            "description": "Identification of an object. This is a reference to a specific insured object.",
+            "format": "int64",
+            "example": 764537
+          },
+          "objectDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the object",
+            "example": "Toyota Corolla"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Date and Time for last insert/update of the record.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "recordTimestamp": {
+            "type": "string",
+            "description": "Date and Time for last insert/update of the record. Updated by system.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "userId": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The last user who inserted or changed the record",
+            "example": "JSM"
+          },
+          "userName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the last user who inserted or changed the record",
+            "example": "John Smith"
+          },
+          "recordUserId": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "Identification of the User who last inserted or updated the record. Updated by system.",
+            "example": "JSI"
+          },
+          "recordUserName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the User who last inserted or updated the record. Updated by system.",
+            "example": "Jeanette Silver"
+          },
+          "caseType": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "CaseType return CASE_TYPE reference data if source of the task is case_item. If source data of the task are Claims, Subclaim, Service Supplier or Complaint - then reference table is TASK_LIST_SOURCE where source is used as a TABLE_NAME.",
+            "example": "Letter Out"
+          },
+          "caseSubType": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "For grouping cases",
+            "example": "FAX"
+          },
+          "numberOfAttachments": {
+            "type": "integer",
+            "description": "Number of attachments present in the task",
+            "format": "int64",
+            "example": 3
+          }
+        },
+        "description": "Holds tasks not assigned directly to users but to users department or work group"
+      },
+      "SingleResultResponseArchive": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/Archive"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseAttachmentQuery": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/AttachmentQuery"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseBulkApiResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/BulkApiResponse"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseCaseItemResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/CaseItemResponse"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseCaseTask": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/CaseTask"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseMasterCaseExtended": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/MasterCaseExtended"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseUserTasks": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/UserTasks"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "UserTasks": {
+        "type": "object",
+        "properties": {
+          "masterCaseNo": {
+            "type": "integer",
+            "description": "A unique identification of the master case.",
+            "format": "int64",
+            "example": 4580243232
+          },
+          "source": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "Source shows which area the task comes from.\u003Cp\u003ECASE: case item\u003Cp\u003ECLAIM: claim task\u003Cp\u003ESUBCLAIM: subclaim task\u003Cp\u003ESSU: service supplier task\u003Cp\u003ECOMP: complaint task.",
+            "example": "CASE"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Id comes from different columns in underlying table depending on the source (which means it's not unique here).\u003Cp\u003ECASE: case_item.request_id\u003Cp\u003ECLAIM: cla_tasklist.seq_no\u003Cp\u003ESUBCLAIM: cla_tasklist.seq_no\u003Cp\u003ESSU: ssu_ser_sup_case_tasklist.uix_seq_no\u003Cp\u003ECOMP: comp_tasklist.seq_no.",
+            "format": "int64"
+          },
+          "taskStatus": {
+            "maxLength": 6,
+            "minLength": 0,
+            "type": "string",
+            "description": "Status of the task. This is either OPEN or CLOSED.\u003Cp\u003ETasks from CASE_ITEM table are open, if action_id \u003E 0, otherwise CLOSED.\u003Cp\u003ETasks from other tables are open, if completion_date is empty, otherwise CLOSED.",
+            "example": "OPEN"
+          },
+          "taskCode": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Task code"
+          },
+          "taskDesc": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Task description.",
+            "example": "Task description"
+          },
+          "actionDate": {
+            "type": "string",
+            "description": "Action date",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "partyId": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Id of customer or partner whereto this case refers.",
+            "format": "int64",
+            "example": 45802
+          },
+          "partyIdAlt": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "Alternative identification of the Party. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case.",
+            "example": "T45802"
+          },
+          "name": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Constructed from forename, middlename and surname, to be used for internal displays. This maximum length must be kept for compatibility reasons.",
+            "example": "Luke Skywalker"
+          },
+          "forename": {
+            "maxLength": 70,
+            "minLength": 0,
+            "type": "string",
+            "description": "Forename or first name. Not used for Company Names.",
+            "example": "Luke"
+          },
+          "surname": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string",
+            "description": "Surname or company name",
+            "example": "Skywalker"
+          },
+          "assignedUser": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this user.",
+            "example": "PPM"
+          },
+          "assignedUserName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Assigned user name.",
+            "example": "Luke Skywalker"
+          },
+          "policyNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Policy no where to this case refers.",
+            "format": "int64",
+            "example": 97721
+          },
+          "policyNoAlt": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "Alternative identification of the policy.",
+            "example": "P97721"
+          },
+          "claimNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Identification of a claim",
+            "format": "int64",
+            "example": 1722
+          },
+          "claimNoAlt": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "Alternative identification of the claim.",
+            "example": "C1722"
+          },
+          "claimSubcaseNo": {
+            "maximum": 9999999999,
+            "type": "integer",
+            "description": "Identification of a claim subcase.",
+            "format": "int64",
+            "example": 2614
+          },
+          "entityId": {
+            "type": "integer",
+            "description": "A unique identification of entity.",
+            "format": "int64",
+            "example": 4580243232
+          },
+          "workGroupId": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this work group.",
+            "example": "GRP1"
+          },
+          "workGroupDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Work group description",
+            "example": "Group 1"
+          },
+          "departmentNo": {
+            "maxLength": 6,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this department.",
+            "example": "1"
+          },
+          "departmentNoDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Department name.",
+            "example": "IT Department"
+          },
+          "companyNo": {
+            "maximum": 99999,
+            "type": "integer",
+            "description": "The case is assigned to a department in this company.",
+            "format": "int64",
+            "example": 1
+          },
+          "companyNoDescription": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Company name.",
+            "example": "TIA Technology"
+          },
+          "description": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the task.",
+            "example": "Description"
+          },
+          "comments": {
+            "maxLength": 4000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Task comments.",
+            "example": "Various comments"
+          },
+          "objectNo": {
+            "type": "integer",
+            "description": "Identification of an object. This is a reference to a specific insured object.",
+            "format": "int64",
+            "example": 764537
+          },
+          "objectDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the object",
+            "example": "Toyota Corolla"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Date and Time for last insert/update of the record.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "recordTimestamp": {
+            "type": "string",
+            "description": "Date and Time for last insert/update of the record. Updated by system.",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "userId": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The last user who inserted or changed the record",
+            "example": "JSM"
+          },
+          "userName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the last user who inserted or changed the record",
+            "example": "John Smith"
+          },
+          "recordUserId": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "Identification of the User who last inserted or updated the record. Updated by system.",
+            "example": "JSI"
+          },
+          "recordUserName": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the User who last inserted or updated the record. Updated by system.",
+            "example": "Jeanette Silver"
+          },
+          "caseType": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "CaseType return CASE_TYPE reference data if source of the task is case_item. If source data of the task are Claims, Subclaim, Service Supplier or Complaint - then reference table is TASK_LIST_SOURCE where source is used as a TABLE_NAME.",
+            "example": "Letter Out"
+          },
+          "caseSubType": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "example": "FAX"
+          },
+          "numberOfAttachments": {
+            "type": "integer",
+            "description": "Number of attachments present in the task",
+            "format": "int64",
+            "example": 3
+          }
+        },
+        "description": "Holds tasks that can be assigned users, departments and workgroups"
+      },
+      "UserTasksPutPayload": {
+        "required": [
+          "taskStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "taskStatus": {
+            "maxLength": 6,
+            "minLength": 0,
+            "type": "string",
+            "description": "Status of the task. This is either OPEN or CLOSED.\u003Cp\u003ETasks from CASE_ITEM table are open, if action_id \u003E 0, otherwise CLOSED.\u003Cp\u003ETasks from other tables are open, if completion_date is empty, otherwise CLOSED.",
+            "example": "OPEN"
+          },
+          "assignedUser": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The case is assigned to this user.",
+            "example": "PPM"
+          }
+        },
+        "description": "Payload to update user tasks"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

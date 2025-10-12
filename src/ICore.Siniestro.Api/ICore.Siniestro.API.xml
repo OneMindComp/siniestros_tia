@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ICore.Siniestro.Api</name>
+    </assembly>
+    <members>
+        <member name="T:ICore.Siniestro.Api.Controllers.Base.CustomControllerBase">
+            <summary>
+            Controlador personalizado para codigos de respuesta API.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.Base.CustomControllerBase.ObtenerRespuesta``1(``0)">
+            <summary>
+            Entrega codigo de busqueda OK o NoContent segun corresponda.
+            </summary>        
+            <typeparam name="T"></typeparam>
+            <param name="resultado"></param>
+            <returns></returns>
+            <exception cref="T:Sbins.Comunes.Excepciones.NotFoundException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Api.Controllers.Base.SbinsApiConvention">
+            <summary>
+            Convencion de documentacion de API, de acuerdo a los codigos de excepcion y tipos de respuesta.
+            </summary>    
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.Base.SbinsApiConvention.Default">
+            <summary>
+            Inicializa default para tipos de respuestas admitidas por controladores.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Api.Controllers.FalabellaController">
+            <summary>
+            Controlador para el envio de ordenes de trabajo de falabella a Tia.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.FalabellaController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.FalabellaController.EstadoServicioTecnico(ICore.Siniestro.Aplicacion.Dtos.Requests.EstadoServicioTecnicoRequest)">
+            <summary>
+            Obtiene estado de servicio tecnico desde Tia para Falabella.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.FalabellaController.Crear(ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest)">
+            <summary>
+            Crea orden de trabajo de falabella en Tia.
+            </summary>
+            <param name="request"></param> 
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.FalabellaController.Crear(ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest)">
+            <summary>
+            Envia courier de orden de trabajo falabella en Tia.
+            </summary>
+            <param name="request"></param> 
+        </member>
+        <member name="T:ICore.Siniestro.Api.Controllers.SiniestroController">
+            <summary>
+            Controlador para siniestros de Tia.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.Crear(ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest)">
+            <summary>
+            Crea siniestros en Tia.
+            </summary>
+            <param name="request"></param> 
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.Obtener(ICore.Siniestro.Aplicacion.Dtos.Requests.SiniestroRequest)">
+            <summary>
+            Obtiene siniestros desde Tia para AWD.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.ObtenerSiniestro(ICore.Siniestro.Aplicacion.Dtos.Requests.SiniestroFraudKeeperRequest)">
+            <summary>
+            Obtiene siniestros desde Tia para FraudKeeper.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.Obtener(ICore.Siniestro.Aplicacion.Dtos.Requests.SubSiniestroRequest)">
+            <summary>
+            Obtiene subsiniestro TIA para FraudKeeper.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.GuardarArchivo(ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoRequest)">
+            <summary>
+            Guarda archivo de siniestro en Core.
+            </summary>
+            <param name="queryParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.GuardarArchivoSubsiniestro(ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoSubsiniestroRequest)">
+            <summary>
+            Guarda archivo de subsiniestro en Core.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ICore.Siniestro.Api.Extensiones.ControllerServiceExtension">
+            <summary>
+            Configuracion para el uso de controladores.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Extensiones.ControllerServiceExtension.ConfigureControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Inicializa en la coleccion de servicios los controladores.
+            </summary>        
+            <returns></returns>
+        </member>
+        <member name="T:ICore.Siniestro.Api.Extensiones.SlugifyParameterTransformer">
+            <summary>
+            Transformador de parametros a uso de minusculas y guion en rutas.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Extensiones.SlugifyParameterTransformer.TransformOutbound(System.Object)">
+            <summary>
+            Transformacion de minusculas y guion.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Api.Extensiones.LoggingBuilderExtension">
+            <summary>
+            Configuracion de componentes de logging.
+            </summary>        
+            <returns></returns>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Extensiones.LoggingBuilderExtension.ConfigureLogging(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            Configura el componente de logging en el programa.
+            </summary>        
+            <returns></returns>
+        </member>
+        <member name="T:ICore.Siniestro.Api.Extensiones.Logging">
+            <summary>
+            Inicializacion de logger standalone para arranque del programa.
+            </summary> 
+        </member>
+        <member name="M:ICore.Siniestro.Api.Extensiones.Logging.GetCurrentLogger">
+            <summary>
+            Obtiene logger standalone para arranque del programa.
+            </summary> 
+        </member>
+        <member name="T:ICore.Siniestro.Api.Extensiones.SwaggerServiceExtension">
+            <summary>
+            Configuracion de Swagger.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Extensiones.SwaggerServiceExtension.AddSbinsSwaggerGen(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,Microsoft.OpenApi.Models.OpenApiInfo)">
+            <summary>
+            Genera interfaz Swagger.
+            </summary>
+            <param name="services"></param>
+            <param name="name"></param>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ICore.Siniestro.Api.Extensiones.SwaggerServiceExtension.UseSbinsSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Agrega Swagger UI para acceder a API.
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

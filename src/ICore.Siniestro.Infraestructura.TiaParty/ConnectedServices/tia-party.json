@@ -1,0 +1,4007 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Party API",
+    "description": "Enterprise RESTful API for Party",
+    "license": {
+      "name": "Sapiens International",
+      "url": "https://sapiens.com/"
+    },
+    "version": "2.8.0-3c7d50f"
+  },
+  "servers": [
+    {
+      "url": "/party/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Customer endpoints",
+      "description": "Complete Customer Controller"
+    },
+    {
+      "name": "Contact detail endpoints",
+      "description": "Contact Detail Controller"
+    },
+    {
+      "name": "Party endpoints",
+      "description": "Party Controller"
+    },
+    {
+      "name": "Household endpoints",
+      "description": "Household Controller"
+    },
+    {
+      "name": "Customer details endpoints",
+      "description": "Customer Controller"
+    }
+  ],
+  "paths": {
+    "/v1/parties/{id}": {
+      "get": {
+        "tags": [
+          "Party endpoints"
+        ],
+        "summary": "Get party by id",
+        "operationId": "getParty",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Party id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "expandOptions",
+            "in": "query",
+            "description": "Used for expand party info. \n Values: CUSTOMER, CONTACT_DETAILS",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponsePartyResponse"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Party endpoints"
+        ],
+        "summary": "Update party",
+        "operationId": "updateParty",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party to be updated",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponsePartyResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/{id}/customer": {
+      "get": {
+        "tags": [
+          "Customer details endpoints"
+        ],
+        "summary": "Get customer for a party",
+        "operationId": "getCustomer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCustomer"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Customer details endpoints"
+        ],
+        "summary": "Update customer",
+        "operationId": "updateCustomer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCustomer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Customer details endpoints"
+        ],
+        "summary": "Create customer",
+        "operationId": "createCustomer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCustomer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/{id}/contact-details/{type}": {
+      "get": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Get contact detail for a party by type",
+        "operationId": "getContactDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party that owns the contact detail",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of the contact detail to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseContactDetail"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Update contact detail",
+        "operationId": "updateContactDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of the contact detail",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactDetail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseContactDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Delete contact detail for a party by type",
+        "operationId": "deleteContactDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party that owns the contact detail",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of the contact detail to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/me": {
+      "get": {
+        "tags": [
+          "Party endpoints"
+        ],
+        "summary": "Get logged in party",
+        "operationId": "getMyParty",
+        "parameters": [
+          {
+            "name": "expandOptions",
+            "in": "query",
+            "description": "Used for expand party info. \n Values: CUSTOMER, CONTACT_DETAILS",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponsePartyResponse"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Party endpoints"
+        ],
+        "summary": "Update logged in party",
+        "operationId": "updateMyParty",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponsePartyResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/me/customer": {
+      "get": {
+        "tags": [
+          "Customer details endpoints"
+        ],
+        "summary": "Get customer for a logged in party",
+        "operationId": "getMyCustomer",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCustomer"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Customer details endpoints"
+        ],
+        "summary": "Update customer of logged in party",
+        "operationId": "updateMyCustomer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCustomer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Customer details endpoints"
+        ],
+        "summary": "Create customer for a logged in party",
+        "operationId": "createMyCustomer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseCustomer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/me/contact-details/{type}": {
+      "get": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Get contact detail for a logged in party by type",
+        "operationId": "getMyContactDetail",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of the contact detail to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseContactDetail"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Update contact detail of logged in party",
+        "operationId": "updateMyContactDetail",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of the contact detail",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactDetail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseContactDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties": {
+      "get": {
+        "tags": [
+          "Party endpoints"
+        ],
+        "summary": "Search for parties",
+        "description": "Supports pagination",
+        "operationId": "getParties",
+        "parameters": [
+          {
+            "name": "idPart",
+            "in": "query",
+            "description": "Partial id to search for party, minimum 2 digits required",
+            "required": false,
+            "schema": {
+              "pattern": "^\\d{2}?[0-9]*$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name used to search for party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Indicate the type of the party",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "civilRegistrationCode",
+            "in": "query",
+            "description": "Civil registration code used to search for party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyRegistrationNo",
+            "in": "query",
+            "description": "Company registration no used to search for party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "street",
+            "in": "query",
+            "description": "Street used to search for party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streetNo",
+            "in": "query",
+            "description": "Street no. Works only with street provided.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "postArea",
+            "in": "query",
+            "description": "Post area used to search for party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "description": "City used to search for party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contactType",
+            "in": "query",
+            "description": "Type of contact detail, e.g. telephone home (‘01’), telephone work (‘02’), fax (‘03’), e-mail (‘04’), etc. Works only with contact detail value provided.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contactValue",
+            "in": "query",
+            "description": "Contact detail value (telephone no, telefax no, e-mail no, etc.)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "countryCode",
+            "in": "query",
+            "description": "Country code used to search for party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expandOptions",
+            "in": "query",
+            "description": "Used for expand party info. \n Values: CUSTOMER, CONTACT_DETAILS",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": ""
+              }
+            }
+          },
+          {
+            "name": "X-Search-Method",
+            "in": "header",
+            "description": "Search method for searching in multi site setup. By default UP is used.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "1": {
+                "description": "1",
+                "value": "UP"
+              },
+              "2": {
+                "description": "2",
+                "value": "DOWN"
+              }
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Result page you want to retrieve (1..N)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponsePartyResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Party endpoints"
+        ],
+        "summary": "Create party",
+        "operationId": "createParty",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponsePartyResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/{id}/contact-details": {
+      "get": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Get all contact details for a party",
+        "description": "Supports and uses pagination",
+        "operationId": "getContactDetails",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Result page you want to retrieve (1..N)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseContactDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Create contact detail",
+        "operationId": "createContactDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the party",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactDetail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseContactDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/me/contact-details": {
+      "get": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Get all contact details for a logged in party",
+        "description": "Supports and uses pagination",
+        "operationId": "getMyContactDetails",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Result page you want to retrieve (1..N)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseContactDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Contact detail endpoints"
+        ],
+        "summary": "Create contact detail for a logged in party",
+        "operationId": "createMyContactDetail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactDetail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseContactDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/households/create-household-from-party": {
+      "post": {
+        "tags": [
+          "Household endpoints"
+        ],
+        "summary": "Creates Household from party",
+        "description": "Creates Household from party by its id, and returns newly created household. If relationTypeId is provided, then party is added as household member with specified relationTypeId",
+        "operationId": "createHouseholdFromParty",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HouseholdFromPartyPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseHousehold"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/customers": {
+      "post": {
+        "tags": [
+          "Customer endpoints"
+        ],
+        "summary": "Create business customer",
+        "operationId": "createCustomer_1",
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessCustomer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "description": "Link to created resource",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseBusinessCustomer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/households/{id}": {
+      "get": {
+        "tags": [
+          "Household endpoints"
+        ],
+        "summary": "Get household and related parties information",
+        "operationId": "getHousehold",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the household",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseHousehold"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Household endpoints"
+        ],
+        "summary": "Update only specified fields of household and members: \"name\" and \"householdMembers/[n]/primaryContact\". Other fields will be ignored.\n",
+        "description": "## Edit Household PATCH example: \n\n```json\n[\n {\"op\":\"replace\",\"path\":\"/name\",\"value\":\"New Household Name\"},\n {\"op\":\"replace\",\"path\":\"/householdMembers/0/primaryContact\",\"value\":true}\n]\n```\n\n",
+        "operationId": "patchHousehold",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "description": "Fields with values to be updated"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseHousehold"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/households/{householdId}/members/{id}": {
+      "get": {
+        "tags": [
+          "Household endpoints"
+        ],
+        "summary": "Get household member information",
+        "operationId": "getHouseholdMember",
+        "parameters": [
+          {
+            "name": "householdId",
+            "in": "path",
+            "description": "The id of the household",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of member",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseHouseholdMember"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Household endpoints"
+        ],
+        "summary": "Update only specified fields of household member: relation type and primary contact. Other fields will be ignored.",
+        "description": "## Edit Household member PATCH example:\n\n```json\n[\n  {\n    \"relationTypeId\": \"20\",\n    \"primaryContact\": true\n  }\n]\n```\n\n",
+        "operationId": "patchHouseholdMember",
+        "parameters": [
+          {
+            "name": "householdId",
+            "in": "path",
+            "description": "The id of the household",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of member",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "description": "Fields with values to be updated"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/customers/{id}": {
+      "get": {
+        "tags": [
+          "Customer endpoints"
+        ],
+        "summary": "Get business customer by id",
+        "operationId": "getCustomer_1",
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the customer",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=60",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleResultResponseBusinessCustomer"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Customer endpoints"
+        ],
+        "summary": "Update fields of business customer",
+        "description": "## Customer PATCH example: \n```json \n{ \n    \"idAlt\": \"ALT555\", \n    \"potential\": false, \n    \"education\": \"Doctor\", \n    \"occupationCode\": \"1\", \n    \"incomeGroup\": \"1\", \n    \"maritalState\": 1, \n    \"spouseBirthDate\": \"1986-01-01T00:00:00.000Z\", \n    \"spouseName\": \"Maria Jensen\", \n    \"children\": 2, \n    \"serviceCode\": \"1\", \n    \"yourReference\": \"REF123\", \n    \"reminderGroup\": \"1\", \n    \"agentNo\": 45314, \n    \"handler\": \"HAN\", \n    \"occupationDetails\": \"Professional Journalist\", \n    \"gender\": \"M\", \n    \"spouseGender\": \"F\", \n    \"address\": { \n         \"unknownAddress\": false, \n         \"houseCoName\": \"Smith\", \n         \"buildingName\": \"Rosenborg\", \n         \"poBox\": \"BOX123\", \n         \"street\": \"Edlevej\", \n         \"streetNo\": \"10\", \n         \"floor\": \"1\", \n         \"floorExtension\": \"th\", \n         \"postalRegion\": \"2830\", \n         \"city\": \"Virum\", \n         \"countryCode\": \"DK\", \n         \"county\": \"Lyngby\", \n         \"postCode\": \"2830\" \n    }, \n    \"mailAddress\": { \n         \"unknownAddress\": false, \n         \"houseCoName\": \"Smithy\", \n         \"poBox\": \"BOX123\", \n         \"street\": \"Edlevej\", \n         \"streetNo\": \"10\", \n         \"floor\": \"1\", \n         \"floorExtension\": \"th\", \n         \"postalRegion\": \"2830\", \n         \"city\": \"Virum\", \n         \"countryCode\": \"DK\", \n         \"county\": \"Lyngby\", \n         \"postCode\": \"2830\" \n    }, \n    \"person\": { \n         \"title\": \"Dr.\", \n         \"forename\": \"George\", \n         \"middleName\": \"Orwell\", \n         \"civilRegistrationCode\": \"280284-9999\", \n         \"birthDate\": \"1984-02-28T00:00:00.000Z\", \n         \"emigrationDate\": \"2010-02-01T00:00:00.000Z\", \n         \"lastname\": \"Hansen\" \n    }, \n    \"marketing\": { \n         \"profileCode\": \"1\", \n         \"statusCode\": \"1\", \n         \"howNotToContact\": 3, \n         \"howToContact\": 1, \n         \"firstContactDate\": \"2010-01-01T00:00:00.000Z\", \n         \"lastContactDate\": \"2021-06-01T00:00:00.000Z\", \n         \"advertising\": \"NO\", \n         \"advertisingDate\": \"2016-01-01T00:00:00.000Z\", \n         \"customerGroup\": \"CG1\", \n         \"customerSegment\": \"CS1\", \n         \"nextContactDate\": \"2021-12-31T00:00:00.000Z\", \n         \"nextContactWay\": \"10\" \n    }, \n    \"hiddenIdentity\": false, \n    \"language\": \"da\", \n    \"currencyCode\": \"DKK\", \n    \"note\": \"Test person customer patch\" \n} \n``` \n",
+        "operationId": "patchCustomer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "description": "Fields with values to be updated"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "ETag": {
+                "description": "Version tag",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/v1/parties/metadata": {
+      "get": {
+        "tags": [
+          "Party endpoints"
+        ],
+        "summary": "Returns links to various MetaData to be used when working with party",
+        "operationId": "getMetadata",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "description": "max-age=3600",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataResponseMetaDataLinks"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "unknownAddress": {
+            "type": "boolean",
+            "description": "The customers address is unknown."
+          },
+          "houseCoName": {
+            "type": "string",
+            "description": "An additional customer name, could for example be used for a c/o name."
+          },
+          "buildingName": {
+            "type": "string",
+            "description": "The name of the building in the address."
+          },
+          "poBox": {
+            "type": "string",
+            "description": "Post office box (P.O. Box)."
+          },
+          "street": {
+            "type": "string",
+            "description": "The street name in the address."
+          },
+          "streetNo": {
+            "type": "string",
+            "description": "The street number in the address."
+          },
+          "floor": {
+            "type": "string",
+            "description": "The floor number in the address."
+          },
+          "floorExtension": {
+            "type": "string",
+            "description": "Door number and location (left, center, right) in the address."
+          },
+          "postStreet": {
+            "type": "string",
+            "description": "The street part of the post code in the address."
+          },
+          "postalRegion": {
+            "type": "string",
+            "description": "The post box or postal region name."
+          },
+          "city": {
+            "type": "string",
+            "description": "The town or city in the address."
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "The ISO Country Code. Based on the reference list 'found at /common/api/v1/references?referenceName=COUNTRY_CODE"
+          },
+          "countryDescription": {
+            "type": "string",
+            "description": "Country description. Based on country code.",
+            "readOnly": true
+          },
+          "county": {
+            "type": "string",
+            "description": "The county in the address."
+          },
+          "postCode": {
+            "type": "string",
+            "description": "The city part of the post code in the address."
+          }
+        },
+        "description": "The customers physical address or mailing address."
+      },
+      "BusinessCustomer": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "idAlt": {
+            "type": "string",
+            "description": "Alternative identification of the customer. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case. This is the id that should be displayed to the end-user (customer or handler).",
+            "readOnly": true
+          },
+          "potential": {
+            "type": "boolean",
+            "description": "Defines whether the customer is a policy holder. False means that the customer is not a policy holder, true means that the customer is a policy holder. The potential code is maintained by the policy system.",
+            "readOnly": true
+          },
+          "education": {
+            "type": "string",
+            "description": "Description of the customers education."
+          },
+          "occupationCode": {
+            "type": "string",
+            "description": "Code for the customers occupation. Based on the reference list found at /common/api/v1/references?referenceName=OCCUPATION_CODE."
+          },
+          "occupationDescription": {
+            "type": "string",
+            "description": "Description of the customers occupation. Based on the occupationCode.",
+            "readOnly": true
+          },
+          "incomeGroup": {
+            "type": "string",
+            "description": "The income group code determines which group the customer belongs to according to his or her income. Based on the reference list found at /common/api/v1/references?referenceName=INCOME_GRP."
+          },
+          "incomeGroupDescription": {
+            "type": "string",
+            "description": "The income group description of the customer. Based on the income group.",
+            "readOnly": true
+          },
+          "genderDescription": {
+            "type": "string",
+            "description": "The gender of the client. Based on the gender code.",
+            "readOnly": true
+          },
+          "maritalState": {
+            "type": "integer",
+            "description": "The customers marital state. Based on the reference list found at /common/api/v1/references?referenceName=MARITAL_STATE.",
+            "format": "int64"
+          },
+          "maritalStateDescription": {
+            "type": "string",
+            "description": "Marital state of the customer. Based on the maritalState code.",
+            "readOnly": true
+          },
+          "spouseBirthDate": {
+            "type": "string",
+            "description": "The Date of Birth of the Clients Spouse.",
+            "format": "date-time"
+          },
+          "spouseName": {
+            "type": "string",
+            "description": "The forename and lastname of the customers spouse."
+          },
+          "children": {
+            "type": "integer",
+            "description": "The number of children the customer has.",
+            "format": "int64"
+          },
+          "serviceCode": {
+            "type": "string",
+            "description": "Defines the frequency with which the customer should be contacted. Based on the reference list found at /common/api/v1/references?referenceName=SERVICE_CODE."
+          },
+          "serviceCodeDescription": {
+            "type": "string",
+            "description": "The frequency with which the customer should be contacted. Based on the serviceCode.",
+            "readOnly": true
+          },
+          "yourReference": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "The customers contact person for any questions or requests."
+          },
+          "reminderGroup": {
+            "type": "string",
+            "description": "Defines the method for reminding the customer. Based on the reference list found at /common/api/v1/references?referenceName=ACC_REMINDER_GROUP."
+          },
+          "reminderGroupDescription": {
+            "type": "string",
+            "description": "Describes how the customer is reminded. Based on the reminderGroup.",
+            "readOnly": true
+          },
+          "agentNo": {
+            "type": "integer",
+            "description": "The ID of the insurance agent handling this customer.",
+            "format": "int64"
+          },
+          "agentName": {
+            "type": "string",
+            "description": "The name of the insurance agent handling this customer. Based on the agentNo.",
+            "readOnly": true
+          },
+          "handler": {
+            "type": "string",
+            "description": "The default handler user id for handling this customer."
+          },
+          "handlerName": {
+            "type": "string",
+            "description": "The default handler name for handling this customer. Based on the handler user id.",
+            "readOnly": true
+          },
+          "occupationDetails": {
+            "type": "string",
+            "description": "Supplementary details about customers occupation."
+          },
+          "gender": {
+            "type": "string",
+            "description": "The gender of the customer. Based on reference list found at /common/api/v1/references?referenceName=SEX."
+          },
+          "spouseGender": {
+            "type": "string",
+            "description": "The gender of the customers spouse."
+          },
+          "householdSize": {
+            "type": "integer",
+            "description": "The number of persons in the customers household.",
+            "format": "int64"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "mailAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "person": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "institution": {
+            "$ref": "#/components/schemas/Institution"
+          },
+          "marketing": {
+            "$ref": "#/components/schemas/Marketing"
+          },
+          "contactDetails": {
+            "type": "array",
+            "description": "The ways to contact or communicate with a customer.",
+            "items": {
+              "$ref": "#/components/schemas/ContactDetails"
+            }
+          },
+          "type": {
+            "type": "integer",
+            "description": "The type of customer, 1: Person 2: Institution",
+            "format": "int64",
+            "enum": [1, 2]
+          },
+          "typeDescription": {
+            "type": "string",
+            "description": "The type of customer can be either person or institution.",
+            "enum": [
+              "Person",
+              "Institution"
+            ]
+          },
+          "hiddenIdentity": {
+            "type": "boolean",
+            "description": "Hidden identity (true/false)."
+          },
+          "language": {
+            "type": "string",
+            "description": "The customers preferred spoken language in ISO code. Based on the reference list found at /common/api/v1/languages."
+          },
+          "languageDescription": {
+            "type": "string",
+            "description": "The customers preferred spoken language. Based on language code."
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "The currency that applies to the customer. If a currency code is connected to one of the customers accounts this will overrule the currency code on customer level for the account. Based on the reference list found at /common/api/v1/references?referenceName=CURRENCY_CODE."
+          },
+          "currencyDescription": {
+            "type": "string",
+            "description": "Currency description. Based on currency code."
+          },
+          "note": {
+            "type": "string",
+            "description": "Internal, free-text note. Not to be shown to the customer."
+          },
+          "obsoleteCode": {
+            "type": "integer",
+            "description": "Code to suspend user. Based on the reference list found at /common/api/v1/references?referenceName=NAME_OBSOLETE_CODE",
+            "format": "int64"
+          },
+          "obsoleteCodeDescription": {
+            "type": "string",
+            "description": "Why customer is obsolete. Based on obsolete code."
+          },
+          "customerDescription": {
+            "type": "string",
+            "description": "Full name or company name."
+          },
+		  "documentType": {
+                   "description": "Document type for civil identification",
+                   "format": "int64",
+                    "type": "integer"
+                 }
+        },
+        "description": "The business customer to be created"
+      },
+      "CompanyOwner": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identifies company owner in the Name table",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "Company owner name"
+          }
+        }
+      },
+      "ContactDetail": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "description": "Telephone no, telefax no, e-mail no, etc."
+          },
+          "preferred": {
+            "type": "boolean",
+            "description": "Supported since Enterprise 7.10.0 (will be ignored for older ones). Preferred contact method, true/false."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of number, e.g. telephone home ('01'), telephone work ('02'), fax ('03'), e-mail ('04'), etc.",
+            "enum": [
+              "00",
+              "01",
+              "02",
+              "03",
+              "04"
+            ]
+          }
+        },
+        "description": "Contact detail to create"
+      },
+      "ContactDetails": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "description": "Telephone number, fax number or e-mail address."
+          },
+          "type": {
+            "type": "string",
+            "description": "Code for the type of contact channel, for example '01' for home telephone or '04' for e-mail. Based on the reference list found at /common/api/v1/references?referenceName=TELEPHONE_TYPE."
+          },
+          "typeDescription": {
+            "type": "string",
+            "description": "Translated description of contact channel. Based on type code.",
+            "readOnly": true
+          },
+          "preferred": {
+            "type": "boolean",
+            "description": "Supported since Enterprise 7.10.0 (will be ignored for older ones). Preferred contact method, true/false."
+          },
+          "communicationTypeCode": {
+            "type": "string",
+            "description": "Supported since Enterprise 7.10.0 (will be ignored for older ones). Code for the communication type. Based on the reference list found at /common/api/v1/references?referenceName=COMMUNICATION_TYPE.",
+            "readOnly": true
+          },
+          "communicationTypeCodeDescription": {
+            "type": "string",
+            "description": "Translated description of communication type. Based on type communicationTypeCode.",
+            "readOnly": true
+          }
+        },
+        "description": "The different ways to contact and communicate with a customer."
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "potential": {
+            "type": "boolean",
+            "description": "Indicates whether the Client is a Policy Holder: false - The Client is not a Policy Holder true - The Client is a Policy Holder The Potential Code is maintained by the Policy System.",
+            "readOnly": true
+          },
+          "education": {
+            "type": "string",
+            "description": "Description of the Clients Education."
+          },
+          "occupationCode": {
+            "type": "string",
+            "description": "The Code indicates the Clients Occupation. See the Occupation Code table for allowed values."
+          },
+          "occupation": {
+            "type": "string",
+            "description": "The Occupation field holds a supplementary description to the Occupation Code."
+          },
+          "profileCode": {
+            "type": "string",
+            "description": "The Profile Code describes the Client. No Code values are predefined. Therefore, it is up to the System Administrator to define the values."
+          },
+          "statusCode": {
+            "type": "string",
+            "description": "The Status Code defines the Clients Social Status in the Society / the Clients importance as a Policy Holder."
+          },
+          "incomeGroup": {
+            "type": "string",
+            "description": "The Income Group Code signals which Group the Client belongs to according to his Income. No Group values are predefined. Therefore, it is up to the System Administrator to define the values."
+          },
+          "sex": {
+            "type": "string",
+            "description": "The Clients Sex: F - Female M - Male"
+          },
+          "maritalState": {
+            "type": "integer",
+            "description": "Indicates the Clients Marital State. See the Marital State table for accepted values.",
+            "format": "int64"
+          },
+          "spouseBirthDate": {
+            "type": "string",
+            "description": "The Date of Birth of the Clients Spouse.",
+            "format": "date-time"
+          },
+          "spouseName": {
+            "type": "string",
+            "description": "The Christian Name and Surname of the Clients Spouse."
+          },
+          "spouseSex": {
+            "type": "string",
+            "description": "The Sex of the Clients Spouse: F - Female M - Male"
+          },
+          "children": {
+            "type": "integer",
+            "description": "The Number of Children the Client has.",
+            "format": "int64"
+          },
+          "household": {
+            "type": "integer",
+            "description": "The Number of Persons in the Clients household.",
+            "format": "int64"
+          },
+          "howNotToContact": {
+            "type": "integer",
+            "description": "The Contact Code specifies how the Client does not want to be contacted.",
+            "format": "int64"
+          },
+          "howToContact": {
+            "type": "integer",
+            "description": "The Contact Code specifies how the Client wants to be contacted or how it is easiest to get in contact with the Client.",
+            "format": "int64"
+          },
+          "serviceCode": {
+            "type": "string",
+            "description": "The Service Code indicates with which frequency the Client should be contacted."
+          },
+          "yourReference": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "description": "Identification of the User the Client should contact if he has any requests."
+          },
+          "firstContactDate": {
+            "type": "string",
+            "description": "Date when the Client was created. This date will never be changed.",
+            "format": "date-time"
+          },
+          "lastContactDate": {
+            "type": "string",
+            "description": "Date for the Latest Contact with the Client.",
+            "format": "date-time"
+          },
+          "firstContactWay": {
+            "type": "integer",
+            "description": "The reason why we have been in touch with the Client the first time.",
+            "format": "int64"
+          },
+          "lastContactWay": {
+            "type": "integer",
+            "description": "The reason why we have been in touch with the Client the last time.",
+            "format": "int64"
+          },
+          "reminderGroup": {
+            "type": "string",
+            "description": "This field holds reminder group. Use for defining how the customer is to be reminded."
+          },
+          "advertising": {
+            "type": "string",
+            "description": "Advertising Accepted"
+          },
+          "advertisingDate": {
+            "type": "string",
+            "description": "Date of advertising accept",
+            "format": "date-time"
+          },
+          "agentNo": {
+            "type": "integer",
+            "description": "Default Agent",
+            "format": "int64"
+          },
+          "customerGroup": {
+            "type": "string",
+            "description": "Customer group"
+          },
+          "customerSegment": {
+            "type": "string",
+            "description": "Customer Segment"
+          },
+          "handler": {
+            "type": "string",
+            "description": "Default Handler"
+          },
+          "nextContactDate": {
+            "type": "string",
+            "description": "Next contact date",
+            "format": "date-time"
+          },
+          "nextContactWay": {
+            "type": "string",
+            "description": "Next contact way"
+          },
+          "siteId": {
+            "type": "integer",
+            "description": "The id of the site",
+            "format": "int64"
+          }
+        },
+        "description": "Customer to create"
+      },
+      "Household": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identification of the Household.",
+            "format": "int64"
+          },
+          "idAlt": {
+            "type": "string",
+            "description": "Alternative id of the Household. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case.",
+            "readOnly": true
+          },
+          "partyType": {
+            "type": "integer",
+            "description": "Indicate the type of the household.",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "Household name"
+          },
+          "city": {
+            "type": "string",
+            "description": "Household city"
+          },
+          "street": {
+            "type": "string",
+            "description": "Household street"
+          },
+          "streetNo": {
+            "type": "string",
+            "description": "Household street number"
+          },
+          "postArea": {
+            "type": "string",
+            "description": "Household post area code"
+          },
+          "country": {
+            "type": "string",
+            "description": "Household country"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "Household country code"
+          },
+          "handlerId": {
+            "type": "string",
+            "description": "Identification of the handler (top_user.user_id)."
+          },
+          "handlerName": {
+            "type": "string",
+            "description": "Household handler name"
+          },
+          "agentId": {
+            "type": "integer",
+            "description": "Identification of the agent (name.id_no).",
+            "format": "int64"
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Household agent name"
+          },
+          "householdMembers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HouseholdMember"
+            }
+          }
+        },
+        "description": "Model documentation for Household"
+      },
+      "HouseholdFromPartyPayload": {
+        "required": [
+          "partyId"
+        ],
+        "type": "object",
+        "properties": {
+          "partyId": {
+            "type": "integer",
+            "description": "Party id, from which will be created household",
+            "format": "int64"
+          },
+          "relationTypeId": {
+            "type": "string",
+            "description": "Relation type id. If not provided, party won't be added as household member"
+          }
+        },
+        "description": "HouseholdFromPartyPaylod"
+      },
+      "HouseholdMember": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identification of the Household member.",
+            "format": "int64"
+          },
+          "idAlt": {
+            "type": "string",
+            "description": "Alternative id of the Household member. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Household member name."
+          },
+          "partyType": {
+            "type": "integer",
+            "description": "Household member party type.",
+            "format": "int64"
+          },
+          "relationTypeId": {
+            "type": "string",
+            "description": "Relation type id."
+          },
+          "relationTypeDescription": {
+            "type": "string",
+            "description": "Relation type description."
+          },
+          "relationDescription": {
+            "type": "string",
+            "description": "Relation description."
+          },
+          "age": {
+            "type": "integer",
+            "description": "Household member age.",
+            "format": "int64"
+          },
+          "handlerId": {
+            "type": "string",
+            "description": "Identification of the handler (top_user.user_id)."
+          },
+          "handlerName": {
+            "type": "string",
+            "description": "Household handler name."
+          },
+          "agentId": {
+            "type": "integer",
+            "description": "Identification of the agent (name.id_no).",
+            "format": "int64"
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Household agent name."
+          },
+          "primaryContact": {
+            "type": "boolean",
+            "description": "Primary contact true/false."
+          },
+          "companyRegistrationYear": {
+            "type": "string",
+            "description": "Household member's company registration date."
+          },
+          "companyVatNo": {
+            "type": "string",
+            "description": "Company VAT number."
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "Company contact person name."
+          },
+          "relationEndDate": {
+            "type": "string",
+            "description": "Household member relation end date.",
+            "format": "date-time"
+          },
+          "companyOwners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompanyOwner"
+            }
+          }
+        }
+      },
+      "Institution": {
+        "type": "object",
+        "properties": {
+          "companyRegistrationNo": {
+            "type": "string",
+            "description": "Official company registration number."
+          },
+          "companyVatNo": {
+            "type": "string",
+            "description": "Official company VAT number."
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "Contact person within the company."
+          },
+          "institutionCode": {
+            "type": "string",
+            "description": "Institution code. Based on the reference list found at /common/api/v1/references?referenceName=INSTITUTION_CODE."
+          },
+          "institutionCodeDescription": {
+            "type": "string",
+            "description": "Institution description. Based on the institution code.",
+            "readOnly": true
+          },
+          "employees": {
+            "type": "integer",
+            "description": "Number of employees",
+            "format": "int64"
+          },
+          "industryCode": {
+            "type": "string",
+            "description": "Industry code. Based on the reference list found at /common/api/v1/references?referenceName=INDUSTRY_CODE."
+          },
+          "industryCodeDescription": {
+            "type": "string",
+            "description": "Industry description. Based on the industry code.",
+            "readOnly": true
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Name of company."
+          },
+          "registrationDate": {
+            "type": "string",
+            "description": "Company registration date.",
+            "format": "date-time"
+          }
+        },
+        "description": "When the customer is an institution."
+      },
+      "Marketing": {
+        "type": "object",
+        "properties": {
+          "profileCode": {
+            "type": "string",
+            "description": "Code for profiling a customer. Based on the reference list found at /common/api/v1/references?referenceName=PROFILE_CODE."
+          },
+          "profileCodeDescription": {
+            "type": "string",
+            "description": "The profile code description of the customer. Based on the profile code.",
+            "readOnly": true
+          },
+          "statusCode": {
+            "type": "string",
+            "description": "The status code defines the customers social status in the society / the customers importance as a policy holder. Based on the reference list found at /common/api/v1/references?referenceName=STATUS_CODE."
+          },
+          "statusCodeDescription": {
+            "type": "string",
+            "description": "The status of the customer. Based on the status code.",
+            "readOnly": true
+          },
+          "howNotToContact": {
+            "type": "integer",
+            "description": "The contact code specifies how the customers does NOT want to be contacted.Based on the reference list found at /common/api/v1/references?referenceName=HOW_TO_CONTACT_CODE.",
+            "format": "int64"
+          },
+          "howNotToContactDescription": {
+            "type": "string",
+            "description": "How not to contact client. Based on how not to contact code.",
+            "readOnly": true
+          },
+          "howToContact": {
+            "type": "integer",
+            "description": "The contact code specifies how the customers wants to be contacted or how it is easiest to get in contact with the customer. Based on the reference list found at /common/api/v1/references?referenceName=HOW_TO_CONTACT_CODE.",
+            "format": "int64"
+          },
+          "howToContactDescription": {
+            "type": "string",
+            "description": "How to contact the client. Based on how to contact code.",
+            "readOnly": true
+          },
+          "firstContactDate": {
+            "type": "string",
+            "description": "Date when the customer was created. This date will never be changed.",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "firstContactWay": {
+            "type": "integer",
+            "description": "The reason why we have been in touch with the Client the first time.",
+            "format": "int64"
+          },
+          "lastContactDate": {
+            "type": "string",
+            "description": "Date for the latest contact with the customer.",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "lastContactWay": {
+            "type": "integer",
+            "description": "The reason why we have been in touch with the Client the last time.",
+            "format": "int64"
+          },
+          "advertising": {
+            "type": "string",
+            "description": "Advertising accepted.Based on the reference list found at /common/api/v1/references?referenceName=ADVERTISING."
+          },
+          "advertisingDescription": {
+            "type": "string",
+            "description": "Advertising accepted description. Based on advertisting code.",
+            "readOnly": true
+          },
+          "advertisingDate": {
+            "type": "string",
+            "description": "Date of advertising accept.",
+            "format": "date-time"
+          },
+          "customerGroup": {
+            "type": "string",
+            "description": "Customer group code.Based on the reference list found at /common/api/v1/references?referenceName=CUSTOMER_GROUP."
+          },
+          "customerGroupDescription": {
+            "type": "string",
+            "description": "Customer group description. Based on customer group code.",
+            "readOnly": true
+          },
+          "customerSegment": {
+            "type": "string",
+            "description": "Customer segment code.Based on the reference list found at /common/api/v1/references?referenceName=CUSTOMER_SEGMENT."
+          },
+          "customerSegmentDescription": {
+            "type": "string",
+            "description": "Customer segment description. Based on segment code.",
+            "readOnly": true
+          },
+          "nextContactDate": {
+            "type": "string",
+            "description": "Next contact date.",
+            "format": "date-time"
+          },
+          "nextContactWay": {
+            "type": "string",
+            "description": "Next contact way code.Based on the reference list found at /common/api/v1/references?referenceName=CONTACT_WAY."
+          },
+          "nextContactWayDescription": {
+            "type": "string",
+            "description": "Next contact way description. Based on next contact way code.",
+            "readOnly": true
+          }
+        },
+        "description": "Marketing information targeting the customer."
+      },
+      "MessageResponse": {
+        "type": "object",
+        "properties": {
+          "messageCode": {
+            "type": "string"
+          },
+          "messageText": {
+            "type": "string"
+          }
+        },
+        "description": "Informational or warning messages"
+      },
+      "MetaDataLinks": {
+        "type": "object",
+        "properties": {
+          "partyTypes": {
+            "type": "string"
+          },
+          "languages": {
+            "type": "string"
+          },
+          "institutionCodes": {
+            "type": "string"
+          },
+          "industryCodes": {
+            "type": "string"
+          },
+          "currencyCodes": {
+            "type": "string"
+          },
+          "countryCodes": {
+            "type": "string"
+          },
+          "contactTypes": {
+            "type": "string"
+          },
+          "relationTypes": {
+            "type": "string"
+          },
+          "sites": {
+            "type": "string"
+          }
+        }
+      },
+      "MetadataResponseMetaDataLinks": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/MetaDataLinks"
+          }
+        }
+      },
+      "PageInfo": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PageResponseContactDetail": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactDetail"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PageResponsePartyResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PartyResponse"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInfo"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "PartyRequest": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "idAlt": {
+            "type": "string",
+            "description": "Alternative identification of the Party. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case."
+          },
+          "type": {
+            "type": "integer",
+            "description": "Indicate the type of the party 1: Person 2: Institution 3: Location of insured objects else unknown",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "description": "The Title. It is suggested only to use Miss, Mrs. and Mr. where possible because experienceshows that it is often difficult to maintain."
+          },
+          "forename": {
+            "type": "string",
+            "description": "Forename or first name. Not used for Company Names."
+          },
+          "middleName": {
+            "type": "string",
+            "description": "In Sweden used to support SPAR format."
+          },
+          "surname": {
+            "type": "string",
+            "description": "Surname or company name"
+          },
+          "civilRegistrationCode": {
+            "type": "string",
+            "description": "National Social Security Code or Company Code"
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "The Clients date of birth.",
+            "format": "date-time"
+          },
+          "deceasedDate": {
+            "type": "string",
+            "description": "In Sweden used to support SPAR format.",
+            "format": "date-time"
+          },
+          "emigrationDate": {
+            "type": "string",
+            "description": "Emigration Date",
+            "format": "date-time"
+          },
+          "hiddenIdentity": {
+            "type": "boolean",
+            "description": "Hidden identity (true/false)."
+          },
+          "unknownAddress": {
+            "type": "boolean",
+            "description": "Unknown_address (true/false)."
+          },
+          "mailUnknownAddress": {
+            "type": "boolean",
+            "description": "Unknown mail address (true/false)."
+          },
+          "companyRegistrationNo": {
+            "type": "string",
+            "description": "Official company registration number. Used for companies only."
+          },
+          "companyVatNo": {
+            "type": "string",
+            "description": "Official company VAT number. Used for companies only."
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "Contact person within a company. Used for companies only."
+          },
+          "institutionCode": {
+            "type": "string",
+            "description": "Institution Code"
+          },
+          "employees": {
+            "type": "integer",
+            "description": "Number of employees",
+            "format": "int64"
+          },
+          "industryCode": {
+            "type": "string",
+            "description": "Industry code"
+          },
+          "language": {
+            "type": "string",
+            "description": "The Clients preferred spoken language."
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "The currency that applies for the client. If a currency code is connected to one of theclients accounts this will overrule the currency code on client level for the actual account."
+          },
+          "note": {
+            "type": "string",
+            "description": "Note"
+          },
+          "houseCoName": {
+            "type": "string",
+            "description": "An alternative name for the Party eg the House Name in the Address or c/o name."
+          },
+          "street": {
+            "type": "string",
+            "description": "The Street Name in the Address."
+          },
+          "streetNo": {
+            "type": "string",
+            "description": "The Street Number of the Address."
+          },
+          "floor": {
+            "type": "string",
+            "description": "On what floor does the Person/Company live."
+          },
+          "floorExtension": {
+            "type": "string",
+            "description": "what door number, left/right etc."
+          },
+          "postArea": {
+            "type": "string",
+            "description": "The City part of the Post Code in the Address."
+          },
+          "postStreet": {
+            "type": "string",
+            "description": "The Street part of the Post Code in the Address."
+          },
+          "postalRegion": {
+            "type": "string",
+            "description": "The post box or postal region name"
+          },
+          "city": {
+            "type": "string",
+            "description": "The Town or City in the Address."
+          },
+          "country": {
+            "type": "string",
+            "description": "The Country in the Address."
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "The ISO Country Code."
+          },
+          "county": {
+            "type": "string",
+            "description": "In Sweden used to support SPAR format"
+          },
+          "addressCode": {
+            "type": "string",
+            "description": "Address Code, key to external address register"
+          },
+          "buildingName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "buildingNumber": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "departmentName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "dependLocality": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "dependStreet": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "dependStreetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "poBox": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "streetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "subBuilding": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailHouseCoName": {
+            "type": "string",
+            "description": "The House Name in the Mailing Address."
+          },
+          "mailStreet": {
+            "type": "string",
+            "description": "The Street Name in the Mailing Address."
+          },
+          "mailStreetNo": {
+            "type": "string",
+            "description": "The House Number in the Mailing Address."
+          },
+          "mailFloor": {
+            "type": "string",
+            "description": "What floor.."
+          },
+          "mailFloorExtension": {
+            "type": "string",
+            "description": "What door number etc"
+          },
+          "mailPostArea": {
+            "type": "string",
+            "description": "The City part of the Post Code in the Mailing Address."
+          },
+          "mailPostStreet": {
+            "type": "string",
+            "description": "The Street part of the Post Code in the Mailing Address."
+          },
+          "mailPostalRegion": {
+            "type": "string",
+            "description": "The po box or postal region of the Mailing Address."
+          },
+          "mailCity": {
+            "type": "string",
+            "description": "The Town or City in the Mailing Address."
+          },
+          "mailCountry": {
+            "type": "string",
+            "description": "The Country in the Mailing Address."
+          },
+          "mailCountryCode": {
+            "type": "string",
+            "description": "The ISO Country Code."
+          },
+          "mailCounty": {
+            "type": "string",
+            "description": "The County in the Mailing Address."
+          },
+          "mailAddressCode": {
+            "type": "string",
+            "description": "Mail Address Code, key to external address register"
+          },
+          "mailBuildingName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailBuildingNumber": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDepartmentName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDependLocality": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDependStreet": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDependStreetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailPoBox": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailStreetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailSubBuilding": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "obsoleteCode": {
+            "type": "integer",
+            "description": "Code to suspend user.",
+            "format": "int64"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Geographic coordinate longitude for place."
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Geographic coordinate latitude for place."
+          },
+		   "name": {
+            "description": "name or company name",
+            "type": "string"
+          },
+		  "documentType": {
+                   "description": "Document type for civil identification",
+                   "format": "int64",
+                    "type": "integer"
+                 }
+        },
+        "description": "The party to be created"
+      },
+      "PartyResponse": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "contactDetails": {
+            "type": "array",
+            "description": "Contact Detail information to display, when expanding party",
+            "items": {
+              "$ref": "#/components/schemas/ContactDetail"
+            }
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Identification of the Party.",
+            "format": "int64",
+            "readOnly": true
+          },
+          "idAlt": {
+            "type": "string",
+            "description": "Alternative identification of the Party. This might be a numeric or alphanumeric value and can be set by user or an external system. Alphanumeric values must be in upper case."
+          },
+          "type": {
+            "type": "integer",
+            "description": "Indicate the type of the party 1: Person 2: Institution 3: Location of insured objects else unknown",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "Constructed from forename, middlename and surname, to be used for internal displays. This maximum length must be kept for compatibility reasons.",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "The Title. It is suggested only to use Miss, Mrs. and Mr. where possible because experienceshows that it is often difficult to maintain."
+          },
+          "forename": {
+            "type": "string",
+            "description": "Forename or first name. Not used for Company Names."
+          },
+          "middleName": {
+            "type": "string",
+            "description": "In Sweden used to support SPAR format."
+          },
+          "surname": {
+            "type": "string",
+            "description": "Surname or company name"
+          },
+          "civilRegistrationCode": {
+            "type": "string",
+            "description": "National Social Security Code or Company Code"
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "The Clients date of birth.",
+            "format": "date-time"
+          },
+          "deceasedDate": {
+            "type": "string",
+            "description": "In Sweden used to support SPAR format.",
+            "format": "date-time"
+          },
+          "emigrationDate": {
+            "type": "string",
+            "description": "Emigration Date",
+            "format": "date-time"
+          },
+          "hiddenIdentity": {
+            "type": "boolean",
+            "description": "Hidden identity (true/false)."
+          },
+          "unknownAddress": {
+            "type": "boolean",
+            "description": "Unknown_address (true/false)."
+          },
+          "mailUnknownAddress": {
+            "type": "boolean",
+            "description": "Unknown mail address (true/false)."
+          },
+          "companyRegistrationNo": {
+            "type": "string",
+            "description": "Official company registration number. Used for companies only."
+          },
+          "companyVatNo": {
+            "type": "string",
+            "description": "Official company VAT number. Used for companies only."
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "Contact person within a company. Used for companies only."
+          },
+          "institutionCode": {
+            "type": "string",
+            "description": "Institution Code"
+          },
+          "employees": {
+            "type": "integer",
+            "description": "Number of employees",
+            "format": "int64"
+          },
+          "industryCode": {
+            "type": "string",
+            "description": "Industry code"
+          },
+          "language": {
+            "type": "string",
+            "description": "The Clients preferred spoken language."
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "The currency that applies for the client. If a currency code is connected to one of the clients accounts this will overrule the currency code on client level for the actual account."
+          },
+          "note": {
+            "type": "string",
+            "description": "Note"
+          },
+          "siteId": {
+            "type": "integer",
+            "description": "The id of the site",
+            "format": "int64"
+          },
+          "houseCoName": {
+            "type": "string",
+            "description": "An alternative name for the Party eg the House Name in the Address or c/o name."
+          },
+          "street": {
+            "type": "string",
+            "description": "The Street Name in the Address."
+          },
+          "streetNo": {
+            "type": "string",
+            "description": "The Street Number of the Address."
+          },
+          "floor": {
+            "type": "string",
+            "description": "On what floor does the Person/Company live."
+          },
+          "floorExtension": {
+            "type": "string",
+            "description": "what door number, left/right etc."
+          },
+          "postArea": {
+            "type": "string",
+            "description": "The City part of the Post Code in the Address."
+          },
+          "postStreet": {
+            "type": "string",
+            "description": "The Street part of the Post Code in the Address."
+          },
+          "postalRegion": {
+            "type": "string",
+            "description": "The post box or postal region name"
+          },
+          "city": {
+            "type": "string",
+            "description": "The Town or City in the Address."
+          },
+          "country": {
+            "type": "string",
+            "description": "The Country in the Address."
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "The ISO Country Code."
+          },
+          "county": {
+            "type": "string",
+            "description": "In Sweden used to support SPAR format"
+          },
+          "addressCode": {
+            "type": "string",
+            "description": "Address Code, key to external address register"
+          },
+          "buildingName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "buildingNumber": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "departmentName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "dependLocality": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "dependStreet": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "dependStreetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "poBox": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "streetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "subBuilding": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailHouseCoName": {
+            "type": "string",
+            "description": "The House Name in the Mailing Address."
+          },
+          "mailStreet": {
+            "type": "string",
+            "description": "The Street Name in the Mailing Address."
+          },
+          "mailStreetNo": {
+            "type": "string",
+            "description": "The House Number in the Mailing Address."
+          },
+          "mailFloor": {
+            "type": "string",
+            "description": "What floor.."
+          },
+          "mailFloorExtension": {
+            "type": "string",
+            "description": "What door number etc"
+          },
+          "mailPostArea": {
+            "type": "string",
+            "description": "The City part of the Post Code in the Mailing Address."
+          },
+          "mailPostStreet": {
+            "type": "string",
+            "description": "The Street part of the Post Code in the Mailing Address."
+          },
+          "mailPostalRegion": {
+            "type": "string",
+            "description": "The po box or postal region of the Mailing Address."
+          },
+          "mailCity": {
+            "type": "string",
+            "description": "The Town or City in the Mailing Address."
+          },
+          "mailCountry": {
+            "type": "string",
+            "description": "The Country in the Mailing Address."
+          },
+          "mailCountryCode": {
+            "type": "string",
+            "description": "The ISO Country Code."
+          },
+          "mailCounty": {
+            "type": "string",
+            "description": "The County in the Mailing Address."
+          },
+          "mailAddressCode": {
+            "type": "string",
+            "description": "Mail Address Code, key to external address register"
+          },
+          "mailBuildingName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailBuildingNumber": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDepartmentName": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDependLocality": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDependStreet": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailDependStreetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailPoBox": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailStreetDescriptor": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "mailSubBuilding": {
+            "type": "string",
+            "description": "In the UK used to support PAF format."
+          },
+          "obsoleteCode": {
+            "type": "integer",
+            "description": "Code to suspend user.",
+            "format": "int64"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Geographic coordinate longitude for place."
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Geographic coordinate latitude for place."
+          }
+        },
+        "description": "Model documentation for Party response body"
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Recommendation: use Miss, Mrs., Ms., Mr. or Mx. where possible because experience shows other,more elaborate titles are often difficult to maintain."
+          },
+          "forename": {
+            "type": "string",
+            "description": "Forename or first name."
+          },
+          "middleName": {
+            "type": "string",
+            "description": "Middle name."
+          },
+          "civilRegistrationCode": {
+            "type": "string",
+            "description": "National Social Security Code."
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "The customers date of birth.",
+            "format": "date-time"
+          },
+          "deceasedDate": {
+            "type": "string",
+            "description": "Date of death.",
+            "format": "date-time"
+          },
+          "emigrationDate": {
+            "type": "string",
+            "description": "Emigration date.",
+            "format": "date-time"
+          },
+          "lastname": {
+            "type": "string",
+            "description": "Lastname."
+          }
+        },
+        "description": "Details for a customer that is a person."
+      },
+      "SingleResultResponseBusinessCustomer": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/BusinessCustomer"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseContactDetail": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/ContactDetail"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseCustomer": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseHousehold": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/Household"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponseHouseholdMember": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/HouseholdMember"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      },
+      "SingleResultResponsePartyResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/PartyResponse"
+          },
+          "messages": {
+            "type": "array",
+            "description": "Informational or warning messages",
+            "items": {
+              "$ref": "#/components/schemas/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

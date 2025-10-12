@@ -1,0 +1,1486 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ICore.Siniestro.Aplicacion</name>
+    </assembly>
+    <members>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.CrearOrdenTrabajoCommand">
+            <summary>
+            Crea siniestro de falabella.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Comandos.CrearOrdenTrabajoCommand.OrdenTrabajo">
+            <summary>
+            Request con data requerida para crear siniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroFalabellaCommandHandler">
+            <summary>
+            Maneja la logica para crear siniestro de falabella.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroFalabellaCommandHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Persistencia.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroFalabellaCommandHandler})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="siniestroContract"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroFalabellaCommandHandler.Handle(ICore.Siniestro.Aplicacion.Comandos.CrearOrdenTrabajoCommand,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para crear un siniestro de falabella en TIA.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroCommand">
+            <summary>
+            Crea siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroCommand.Request">
+            <summary>
+            Request con data requerida para crear siniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroCommandHandler">
+            <summary>
+            Maneja la logica para crear siniestro.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroCommandHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Persistencia.ISiniestroContract,AutoMapper.IMapper,ICore.Siniestro.Infraestructura.TiaParty.ITiaPartyClient,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroCommandHandler})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="siniestro"></param>
+            <param name="mapper"></param>
+            <param name="partyClient"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroCommandHandler.Handle(ICore.Siniestro.Aplicacion.Comandos.CrearSiniestroCommand,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para crear un siniestro.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:Sbins.Comunes.Excepciones.ApplicationException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.EnviarCourierCommand">
+            <summary>
+            Envia el courier de falabella.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Comandos.EnviarCourierCommand.Courier">
+            <summary>
+            Request con data requerida para enviar el courier.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.EnviarCourierCommandHandler">
+            <summary>
+            Maneja la logica para enviar el courier.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.EnviarCourierCommandHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Persistencia.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Comandos.EnviarCourierCommandHandler})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="siniestroContract"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.EnviarCourierCommandHandler.Handle(ICore.Siniestro.Aplicacion.Comandos.EnviarCourierCommand,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para enviar el courier.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoCommand">
+            <summary>
+            Guarda un archivo de siniestro en el core.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoCommand.Request">
+            <summary>
+            Request con data requerida para guardar archivo de siniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoCommandHandler">
+            <summary>
+            Maneja la logica para guardar archivo de siniestro en el core.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoCommandHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Persistencia.IArchivoContract,ICore.Siniestro.Aplicacion.Contratos.Persistencia.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoCommandHandler})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="archivoContract"></param>
+            <param name="siniestroContract"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoCommandHandler.Handle(ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoCommand,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para guardar archivo de siniestro en el core.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:Sbins.Comunes.Excepciones.ApplicationException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoSubsiniestroCommand">
+            <summary>
+            Guarda un archivo de subsiniestro en el core.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoSubsiniestroCommand.Request">
+            <summary>
+            Request con data requerida para guardar archivo de subsiniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoSubsiniestroCommandHandler">
+            <summary>
+            Maneja la logica para guardar archivo de subsiniestro en el core.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoSubsiniestroCommandHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Persistencia.IArchivoContract,ICore.Siniestro.Aplicacion.Contratos.Persistencia.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoSubsiniestroCommandHandler})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="archivoContract"></param>
+            <param name="siniestroContract"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoSubsiniestroCommandHandler.Handle(ICore.Siniestro.Aplicacion.Comandos.GuardarArchivoSubsiniestroCommand,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para guardar archivo de subsiniestro en el core.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:Sbins.Comunes.Excepciones.ApplicationException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.ConfigureServiceExtension">
+            <summary>
+            Configura servicios de la capa aplicacion.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.ConfigureServiceExtension.AddAplicacion(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Agrega servicios de aplicacion al contenedor de servicios.
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerEstadoServicioTecnicoQuery">
+            <summary>
+            Obtiene el estado del servicio tecnico desde Tia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Consultas.ObtenerEstadoServicioTecnicoQuery.RequestEstado">
+            <summary>
+            Datos del estado. 
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerEstadoServicioTecnicoQueryHandler">
+            <summary>
+            Maneja la logica para obtener el estado del servicio tecnico desde Tia.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerEstadoServicioTecnicoQueryHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Core.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Consultas.ObtenerEstadoServicioTecnicoQueryHandler},AutoMapper.IMapper)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="siniestroContract"></param>
+            <param name="logger"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerEstadoServicioTecnicoQueryHandler.Handle(ICore.Siniestro.Aplicacion.Consultas.ObtenerEstadoServicioTecnicoQuery,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para obtener el estado del servicio tecnico desde Tia.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroAwdQuery">
+            <summary>
+            Obtiene los siniestros Awd desde Tia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroAwdQuery.NumeroSiniestro">
+            <summary>
+            Numero de siniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroQueryHandler">
+            <summary>
+            Maneja la logica para consultar los siniestros.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroQueryHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Core.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroQueryHandler},AutoMapper.IMapper)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="siniestro"></param>
+            <param name="logger"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroQueryHandler.Handle(ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroAwdQuery,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para consultar los siniestros
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroFraudKeeperQuery">
+            <summary>
+            Obtiene los siniestros fraudkeeper desde Tia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroFraudKeeperQuery.Request">
+            <summary>
+            Datos del siniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroFraudQueryHandler">
+            <summary>
+            Maneja la logica para consultar los siniestros fraudkeeper.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroFraudQueryHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Core.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroFraudQueryHandler},AutoMapper.IMapper)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="siniestro"></param>
+            <param name="logger"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroFraudQueryHandler.Handle(ICore.Siniestro.Aplicacion.Consultas.ObtenerSiniestroFraudKeeperQuery,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para consultar los siniestros fraudkeeper.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.ApplicationException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerSubSiniestroQuery">
+            <summary>
+            Obtiene subsiniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Consultas.ObtenerSubSiniestroQuery.Request">
+            <summary>
+            Datos del subsiniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Consultas.ObtenerSubSiniestroQueryHandler">
+            <summary>
+            Maneja la logica para consultar los sub-siniestros.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerSubSiniestroQueryHandler.#ctor(ICore.Siniestro.Aplicacion.Contratos.Persistencia.ISiniestroContract,Microsoft.Extensions.Logging.ILogger{ICore.Siniestro.Aplicacion.Consultas.ObtenerSubSiniestroQueryHandler})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="siniestroContract"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Consultas.ObtenerSubSiniestroQueryHandler.Handle(ICore.Siniestro.Aplicacion.Consultas.ObtenerSubSiniestroQuery,System.Threading.CancellationToken)">
+            <summary>
+            Implementa la logica para consultar los sub-siniestros.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.ApplicationException"></exception>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest">
+            <summary>
+            Courier
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest.MemberNo">
+            <summary>
+            Numero de socio.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest.CertificateNo">
+            <summary>
+            Numero certificado u otNumAct.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest.ExtWoNo">
+            <summary>
+            Numero orden de trabajo.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest.EventDate">
+            <summary>
+            fechaEvento + horaEvento (ISO-8601 format)
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest.TransactionId">
+            <summary>
+            Codigo de transaccion.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.EnviarCourierRequest.MessageId">
+            <summary>
+            id del mensaje.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.EstadoServicioTecnicoRequest">
+            <summary>
+            Request para el cambio de estado del servicio tecnico desde Tia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.EstadoServicioTecnicoRequest.ClaimCaseNo">
+            <summary>
+            Numero de siniestro Tia.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoRequest">
+            <summary>
+            Request para guardar achivo en el core.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoRequest.Data">
+            <summary>
+            Archivo a guardar.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoRequest.NumeroSiniestro">
+            <summary>
+            Numero de siniestro sin guion ni certificado.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoSubsiniestroRequest">
+            <summary>
+            Request para guardar achivo de subsiniestro en el core.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoSubsiniestroRequest.Data">
+            <summary>
+            Archivo a guardar.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.GuardarArchivoSubsiniestroRequest.NumeroSubsiniestro">
+            <summary>
+            Numero de subsiniestro con guion y certificado.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest">
+            <summary>
+            Request para el siniestro de falabella
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.CertificateNo">
+            <summary>
+            Numero de certificado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.CompanyRegistrationNo">
+            <summary>
+            Numero de registro de compañia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.EventType">
+            <summary>
+            Tipo de evento.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.CauseType">
+            <summary>
+            Tipo Causa.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.SubcauseType">
+            <summary>
+            Sub Tipo Causa.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.IncidentDate">
+            <summary>
+            Fecha incidente.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.IsExactIncidentDate">
+            <summary>
+            Es fecha de incidente exacta.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.PlaceType">
+            <summary>
+            Tipo de lugar.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.Address">
+            <summary>
+            Direccion del siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.Handler">
+            <summary>
+            Gestor.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.InformerType">
+            <summary>
+            Tipo de informante.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.InformerName">
+            <summary>
+            Nombre Informante.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.NotificationDate">
+            <summary>
+            Fecha de notificacion.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.Status">
+            <summary>
+            Estado siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.LossOfBonus">
+            <summary>
+            Perdida de bono.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.Description">
+            <summary>
+            Descripcion del siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.RiskNo">
+            <summary>
+            Numero de riesgo.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.SubriskNo">
+            <summary>
+            Numero de subriesgo
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.FiledBy">
+            <summary>
+            Archivado por.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.C24">
+            <summary>
+            Rut del contacto
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.C26">
+            <summary>
+            Fono IVR.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.C28">
+            <summary>
+            Fono del contacto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.C29">
+            <summary>
+            Direccion comercial del cliente.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.OrdenTrabajoRequest.C903">
+            <summary>
+            OT_NUM_ST + OT_COD_SUC_INGRESO + OT_NUM_GUIA_SOCIO + COD_SINIESTRO + COD_TIP_AT_SINIESTRO + COD_TRANSACCION + ID_MENSAJE
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.SiniestroFraudKeeperRequest">
+            <summary>
+            Request para el siniestro de fraudkeeper.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.SiniestroFraudKeeperRequest.NumeroSiniestro">
+            <summary>
+            Numero de siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.SiniestroFraudKeeperRequest.NumeroCaso">
+            <summary>
+            Numero de caso.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.SiniestroRequest">
+            <summary>
+            Request para el siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.SiniestroRequest.NumeroSiniestro">
+            <summary>
+            Numero de siniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest">
+            <summary>
+            Request para siniestro soap.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.NumeroPoliza">
+            <summary>
+            Numero de poliza.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.Patente">
+            <summary>
+            Patente.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.RutContratante">
+            <summary>
+            Rut contratante.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.NombreContratante">
+            <summary>
+            Nombre contratante.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.RutLesionado">
+            <summary>
+            Rut lesionado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.NombreLesionado">
+            <summary>
+            Nombre lesionado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.Fecha">
+            <summary>
+            Fecha siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.NumeroParte">
+            <summary>
+            Numero de parte.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.FechaParte">
+            <summary>
+            Fecha de parte.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.TipoEvento">
+            <summary>
+            Tipo de evento.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.NumeroInterno">
+            <summary>
+            Numero interno.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.RutInstitucionSalud">
+            <summary>
+            Rut institucion de salud.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.NombreInstitucionSalud">
+            <summary>
+            Nombre institucion de salud.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.MontoBruto">
+            <summary>
+            Monto bruto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.Iva">
+            <summary>
+            Iva.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.MontoNeto">
+            <summary>
+            Monto neto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.NumeroFactura">
+            <summary>
+            Numero de factura.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.Controlador">
+            <summary>
+            Controlador
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Soap.SiniestroSoapRequest.Liquidador">
+            <summary>
+            Liquidador
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.SubSiniestroRequest">
+            <summary>
+            Request para obtener un subsiniestro por numero.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.SubSiniestroRequest.NumeroSubSiniestro">
+            <summary>
+            Numero de subsiniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse">
+            <summary>
+            Respuesta para el estado de servicio tecnico desde Tia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.NumeroServicioTecnico">
+            <summary>
+            Número del Servicio Técnico.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.NumeroF11">
+            <summary>
+            Número de Guia Socio - F11.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.CodigoServicioTecnico">
+            <summary>
+            Código Servicio Técnico (Rut ST)-F11.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.NombreServicioTecnico">
+            <summary>
+            Nombre Servicio Técnico-F11.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.TelefonoServicioTecnico">
+            <summary>
+            Telefono Servicio Técnico-F11.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.SucursalServicioTecnico">
+            <summary>
+            Sucursal Servicio Técnico-F11.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.EstadoOrdenTrabajo">
+            <summary>
+            Estado OT/F11 Sistema Externo.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.FechaModificacionEstado">
+            <summary>
+            Fecha Modificación Estado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.FechaRecepcionProducto">
+            <summary>
+            Fecha Recepción Producto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.NumeroGuiaRecepcion">
+            <summary>
+            Número Guia Recepción Producto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.FechaEntregaProducto">
+            <summary>
+            Fecha Entrega Producto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.NumeroGuiaDespacho">
+            <summary>
+            Número Guía Despacho Producto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.DescripcionRechazoOReparacion">
+            <summary>
+            Descripción y/o Motivo de Rechazo o Reparación.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.SkuProducto">
+            <summary>
+            SKU Producto cambio.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.PrecioProducto">
+            <summary>
+            Precio Producto cambio.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.FechaCreacionOT">
+            <summary>
+            Fecha de Creación de OT Sistema Externo (SBINS).
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.EstadoServicioTecnicoResponse.NumeroOTServicioTecnico">
+            <summary>
+            Numero OT Servicio Externo (SBINS).
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdAfectadoFieldResponse">
+            <summary>
+            Campo afectado para Response de obtener siniestro awd.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdAfectadoFieldResponse.Rut">
+            <summary>
+            Rut del afectado
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdAfectadoFieldResponse.Nombre">
+            <summary>
+            Nombre del afectado
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldAseguradoResponse">
+            <summary>
+            Campo asegurado para Response de obtener siniestro awd.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldAseguradoResponse.Rut">
+            <summary>
+            Rut del asegurado
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldAseguradoResponse.Nombre">
+            <summary>
+            Nombre del asegurado
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldCorredorResponse">
+            <summary>
+            Campo corredor para Response de obtener siniestro awd.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldCorredorResponse.Id">
+            <summary>
+            Id del corredor
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldCorredorResponse.Nombre">
+            <summary>
+            Nombre del corredor
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdLiquidadorFieldResponse">
+            <summary>
+            Campo liquidador para Response de obtener siniestro awd.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdLiquidadorFieldResponse.Id">
+            <summary>
+            Id del liquidador
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdLiquidadorFieldResponse.Nombre">
+            <summary>
+            Nombre del liquidador
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse">
+            <summary>
+            Response para los datos adicionales que se envian a Awd.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.NumeroPoliza">
+            <summary>
+            Numero de poliza
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.NumeroCertificado">
+            <summary>
+            Numero de certificado
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.LineaNegocio">
+            <summary>
+            Linea de negocio
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.InicioVigencia">
+            <summary>
+            Inicio de vigencia
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.TerminoVigencia">
+            <summary>
+            Termino de vigencia
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.Ramo">
+            <summary>
+            Ramo
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.Asegurado">
+            <summary>
+            Asegurado
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.Awd.ObtenerSiniestroAwdFieldPolizaResponse.Corredor">
+            <summary>
+            Corredor
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldDatosAdicionalesResponse">
+            <summary>
+            Campo datos adicionales para Response de obtener siniestro fraudkeeper.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldDatosAdicionalesResponse.Codigo">
+            <summary>
+            Codigo del dato adicional.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldDatosAdicionalesResponse.Nombre">
+            <summary>
+            Nombre del dato adicional.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldDatosAdicionalesResponse.Plugin">
+            <summary>
+            Plugin utilizado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldDatosAdicionalesResponse.Valor">
+            <summary>
+            Valor del dato adicional.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldDatosAdicionalesResponse.Version">
+            <summary>
+            Version del dato adicional.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse">
+            <summary>
+            Campo exposicion para Response de obtener siniestro fraudkeeper.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.DescripcionCobertura">
+            <summary>
+            Descripcion de Cobertura.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.CodigoCobertura">
+            <summary>
+            Codigo de Descripcion de Cobertura.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.MonedaCobertura">
+            <summary>
+            Moneda de Cobertura.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.MontoAseguradoActual">
+            <summary>
+            Monto asegurado actual.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.MontoAseguradoOriginal">
+            <summary>
+            Monto asegurado original.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.Reserva">
+            <summary>
+            Reserva.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.Pago">
+            <summary>
+            Pago.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.ReservaMonedaLocal">
+            <summary>
+            Reserva en moneda local.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.PagoMonedaLocal">
+            <summary>
+            Pago en moneda local.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.FirstParty">
+            <summary>
+            No utilizado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.ContactosRelacionados">
+            <summary>
+            Contactos relacionados, no utilizado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.Modelos">
+            <summary>
+            Modelos, no utilizado
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.DatosAdicionales">
+            <summary>
+            Datos adicionales.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.Vehiculos">
+            <summary>
+            Listado de patentes de vehiculos, no utilizado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldExposicionResponse.Riesgos">
+            <summary>
+            Listado de riesgos.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldParticipanteResponse">
+            <summary>
+            Campo participante para Response de obtener siniestro fraudkeeper.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldParticipanteResponse.Roles">
+            <summary>
+            Rol de la persona: Demandante, Asegurado, Afectado, Corredor, Liquidador.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldParticipanteResponse.IdEjecutivo">
+            <summary>
+            Id de ejecutivo (Liquidador, Corredor).
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldParticipanteResponse.Persona">
+            <summary>
+            persona.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse">
+            <summary>
+            Campo persona para Response de obtener siniestro fraudkeeper.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.Nombre">
+            <summary>
+            Nombre de la persona.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.Rut">
+            <summary>
+            RUT de la persona.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.Direccion">
+            <summary>
+            Direccion de la persona.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.Ciudad">
+            <summary>
+            Ciudad de la persona.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.Estado">
+            <summary>
+            Estado de la persona.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.Pais">
+            <summary>
+            Pais de la persona.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.TipoPersona">
+            <summary>
+            Tipo de persona C: Empresa P: Persona.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.NombreADesplegar">
+            <summary>
+            Nombre a desplegar.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPersonaResponse.ClienteDesde">
+            <summary>
+            Fecha desde cuando es cliente.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse">
+            <summary>
+            Campo poliza para Response de obtener siniestro fraudkeeper.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.NumeroPoliza">
+            <summary>
+            Numero de Poliza.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.FechaCreacion">
+            <summary>
+            Fecha de Creacion.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.FechaInicio">
+            <summary>
+            Fecha de Inicio de vigencia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.FechaExpiracion">
+            <summary>
+            Fecha de Expiracion de vigencia.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.FechaCancelacion">
+            <summary>
+            Fecha de Cancelacion.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.FechaRehabilitacion">
+            <summary>
+            Fecha de Rehabilitacion.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.CodigoProducto">
+            <summary>
+            Codigo del Producto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.CodigoProductor">
+            <summary>
+            Codigo del Productor.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.TextoAdicional">
+            <summary>
+            Texto adicional.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.MetodoVenta">
+            <summary>
+            Metodo de Venta.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.Prima">
+            <summary>
+            Prima.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.PrimaConImpuestos">
+            <summary>
+            Prima mas Impuestos.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.NumeroCertificado">
+            <summary>
+            Numero de Certificado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.LineaNegocio">
+            <summary>
+            Linea de negocio.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldPolizaResponse.Ramo">
+            <summary>
+            Codigo de Ramo.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldRiesgoResponse">
+            <summary>
+            Campo riesgo para Response de obtener siniestro fraudkeeper.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldRiesgoResponse.Numero">
+            <summary>
+            Numero de riesgo.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldRiesgoResponse.Codigo">
+            <summary>
+            Codigo de riesgo.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldRiesgoResponse.Descripcion">
+            <summary>
+            Descripcion del riesgo.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Fields.FraudKeeper.ObtenerSiniestroFraudKeeperFieldRiesgoResponse.Especificaciones">
+            <summary>
+            Especificaciones del riesgo.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoResponse">
+            <summary>
+            Response de guardar archivo en el core.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoResponse.NumeroSiniestro">
+            <summary>
+            Numero de siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoResponse.IdCaso">
+            <summary>
+            Identificador del caso de un siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoResponse.ArchivoGuardado">
+            <summary>
+            Estado de guardado true si satisfactorio o false si error.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoResponse.Mensaje">
+            <summary>
+            Mensaje de exito u error, segun sea el estado.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoSubsiniestroResponse">
+            <summary>
+            Response de guardar archivo de subsiniestro en el core.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoSubsiniestroResponse.NumeroSubsiniestro">
+            <summary>
+            Numero de subsiniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoSubsiniestroResponse.IdCaso">
+            <summary>
+            Identificador del caso de un siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoSubsiniestroResponse.ArchivoGuardado">
+            <summary>
+            Estado de guardado true si satisfactorio o false si error.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.GuardarArchivoSubsiniestroResponse.Mensaje">
+            <summary>
+            Mensaje de exito u error, segun sea el estado.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse">
+            <summary>
+            Response del siniestro Awd.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.NumeroSiniestro">
+            <summary>
+            Numero de siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.EstadoSiniestro">
+            <summary>
+            Estado de siniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.CodigoEstado">
+            <summary>
+            Codigo de estado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.Ajustador">
+            <summary>
+            Nombre ajustador.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.FechaPerdida">
+            <summary>
+            Fecha de perdida.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.LugarPerdida">
+            <summary>
+            Lugar de perdida.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.DescripcionPerdida">
+            <summary>
+            descripcion de la perdida.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.CodigoCatastrofe">
+            <summary>
+            Codigo de catastrofe.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.FechaReporteSiniestro">
+            <summary>
+            Fecha reporte de siniestr´.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.FechaCreacion">
+            <summary>
+            Fecha creacion.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.Moneda">
+            <summary>
+            Tipo moneda.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.ReservaIndemnizacion">
+            <summary>
+            Reserva de indemnizacion.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.ReservaHonorarios">
+            <summary>
+            Reserva de honorarios.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.PorcentajeSeguidor">
+            <summary>
+            Porcentaje seguidor.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.Afectado">
+            <summary>
+            Afectado.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.Liquidador">
+            <summary>
+            Liquidador.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroAwdResponse.Poliza">
+            <summary>
+            Poliza.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse">
+            <summary>
+            Response del siniestro fraudkeeper
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.FechaCreacion">
+            <summary>
+            Fecha de creacion del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.IdPublico">
+            <summary>
+            Identificador siniestro + subsiniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.NumeroSiniestro">
+            <summary>
+            Numero del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.FechaAcontecimiento">
+            <summary>
+            Fecha que ocurrio el siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.FechaApertura">
+            <summary>
+            Fecha de apertura del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.FechaNotificacion">
+            <summary>
+            Fecha de notificacion del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Descripcion">
+            <summary>
+            Descripcion del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.CausaPrimaria">
+            <summary>
+            Causa primaria del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Direccion">
+            <summary>
+            Direccion que ocurrio el siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Pais">
+            <summary>
+            Pais que ocurrio del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.HasMatters">
+            <summary>
+            Indicador de importancia del siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.CoberturaEnCuestion">
+            <summary>
+            Cobertura en cuestion
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.NotasAdicionales">
+            <summary>
+            Notas adicionales
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.AdministradorReclamos">
+            <summary>
+            Administrador del reclamos
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.NumeroDeVehiculos">
+            <summary>
+            Numero de Vehiculos
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.NumeroDeTestigos">
+            <summary>
+            Numero de Testigos
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.MontoTotalReclamo">
+            <summary>
+            Total monto reclamado
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.BranchGroupCode">
+            <summary>
+            Major line
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.BranchGroupDescription">
+            <summary>
+            Major line cd + Minor line + Class profile cd
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Lenguaje">
+            <summary>
+            Lenguaje
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.InformacionExterna">
+            <summary>
+            Informacion Externa
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Archivos">
+            <summary>
+            Archivos
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Poliza">
+            <summary>
+            Poliza
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Exposiciones">
+            <summary>
+            Exposiciones
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.DatosAdicionales">
+            <summary>
+            Datos adicional
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.ObtenerSiniestroFraudKeeperResponse.Participantes">
+            <summary>
+            Entidad particpante del siniestro (demandante, Afectado, Liquidador, etc)
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.OrdenTrabajoResponse">
+            <summary>
+            Response para la orden de trabajo.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.OrdenTrabajoResponse.NumeroSiniestro">
+            <summary>
+            Respuesta numero siniestro.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.Soap.SiniestroPropuestoResponse">
+            <summary>
+            Response para el siniestro propuesto.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.Soap.SiniestroPropuestoResponse.NumeroSiniestro">
+            <summary>
+            Respuesta.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Responses.SubSiniestroResponse">
+            <summary>
+            Response para el subsiniestro.
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Responses.SubSiniestroResponse.NumeroCaso">
+            <summary>
+            Numero de caso.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Mapeadores.EstadoOrdenTrabajoMapProfile">
+            <summary>
+            Perfil para el uso de automapper.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Mapeadores.EstadoOrdenTrabajoMapProfile.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Mapeadores.IMapFrom`1">
+            <summary>
+            Configuracion automaper para entidades genericas T.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Mapeadores.IMapFrom`1.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapeo de entidades genericas T que implementen la interfaz.
+            </summary>
+            <param name="profile">Perfil de mapeo utilizado para crear el mapeo.</param>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Mapeadores.MappingProfile">
+            <summary>
+            Configuracion de perfil para automaper..
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Mapeadores.MappingProfile.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Mapeadores.PolizaFraudKeeperMapProfile">
+            <summary>
+            Perfil para el uso de automapper.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Mapeadores.PolizaFraudKeeperMapProfile.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Validaciones.SiniestroSoapValidacion">
+            <summary>
+            Clase de configuracion fluent validation SiniestroSoapRequest.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Validaciones.SiniestroSoapValidacion.#ctor">
+            <summary>
+            Constructor que implementa las validaciones.
+            </summary>
+        </member>
+        <member name="T:ICore.Siniestro.Aplicacion.Validaciones.ValidacionExtension">
+            <summary>
+            Clase de configuracion fluent validation.
+            </summary>
+        </member>
+        <member name="M:ICore.Siniestro.Aplicacion.Validaciones.ValidacionExtension.AddValidationExtension(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Constructor declara los servicios de fluet validation.
+            </summary>
+        </member>
+    </members>
+</doc>
