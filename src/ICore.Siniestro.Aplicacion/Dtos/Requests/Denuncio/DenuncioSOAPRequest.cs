@@ -8,7 +8,7 @@ namespace ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio
     /// <summary>
     /// Denuncio de siniestro SOAP (vehiculos)
     /// </summary>
-    public class DenuncioSOAPRequest : DenuncioSiniestroRequest
+    public class DenuncioSoapRequest : DenuncioSiniestroRequest
     {
         /// <summary>
         /// tipo de siniestro

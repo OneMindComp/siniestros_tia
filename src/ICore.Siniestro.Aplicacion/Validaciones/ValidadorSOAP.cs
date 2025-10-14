@@ -14,7 +14,7 @@ namespace ICore.Siniestro.Aplicacion.Validaciones
         /// <param name="errores"></param>
         protected override void ValidarEspecifico(DenuncioSiniestroRequest denuncio, List<string> errores)
         {
-            if (denuncio is not DenuncioSOAPRequest soap) return;
+            if (denuncio is not DenuncioSoapRequest soap) return;
 
             if (soap.Vehiculo == null || string.IsNullOrEmpty(soap.Vehiculo.Patente))
                 errores.Add("Vehiculo es requerido para denuncios SOAP");

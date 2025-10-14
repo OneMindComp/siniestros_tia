@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using ICore.Siniestro.Aplicacion.Contratos.Core;
 using ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio;
 using ICore.Siniestro.Aplicacion.Dtos.Requests.Soap;
 using ICore.Siniestro.Aplicacion.Dtos.Responses.Soap;
+using ICore.Siniestro.Aplicacion.Servicios;
 using ICore.Siniestro.Dominio.Entidades;
 using ICore.Siniestro.Dominio.Entidades.Soap;
 using ICore.Siniestro.Infraestructura.TiaParty;
@@ -26,11 +28,10 @@ namespace ICore.Siniestro.Aplicacion.Comandos
     /// </summary>
     public class CrearDenuncioSiniestroCommandHandler : IRequestHandler<CrearDenuncioSiniestroCommand, SiniestroPropuestoResponse>
     {
-
-        private readonly ServicioValidacionDenuncios _servicioValidacion;
+        private readonly ISiniestroContract _siniestro;
+        private readonly IValidacionDenuncios _validacionDenuncios;
         private readonly IMapper _mapper;
-        private readonly ITiaPartyClient _partyClient;
-        private readonly ILogger<CrearSiniestroCommandHandler> _logger;
+        private readonly ILogger<CrearDenuncioSiniestroCommandHandler> _logger;
 
         /// <summary>
         /// Constructor.
@@ -39,11 +40,10 @@ namespace ICore.Siniestro.Aplicacion.Comandos
         /// <param name="mapper"></param>
         /// <param name="partyClient"></param>
         /// <param name="logger"></param>
-        public CrearDenuncioSiniestroCommandHandler(ISiniestroContract siniestro, IMapper mapper, ITiaPartyClient partyClient, ILogger<CrearSiniestroCommandHandler> logger)
+        public CrearDenuncioSiniestroCommandHandler(ISiniestroContract siniestro, IMapper mapper, ITiaPartyClient partyClient, ILogger<CrearDenuncioSiniestroCommandHandler> logger)
         {
             _siniestro = siniestro;
             _mapper = mapper;
-            _partyClient = partyClient;
             _logger = logger;
         }
         /// <summary>
@@ -59,16 +59,16 @@ namespace ICore.Siniestro.Aplicacion.Comandos
             {
                 _logger.LogInformation("Se inicia el metodo CrearDenuncioSiniestroCommand ");
 
-                var errores = _servicioValidacion.Validar(command.Request);
+                var errores = _validacionDenuncios.Validar(request.Request);
 
                 if (errores.Count > 0)
                 {
                     return Resultado<SiniestroPropuestoResponse>.Fallo(errores);
                 }
 
-                var response = command.Request switch
+                var response = request.Request switch
                 {
-                    DenuncioSOAPRequest soap => await ProcesarSOAP(soap, cancellationToken),
+                    DenuncioSoapRequest soap => await ProcesarSOAP(soap, cancellationToken),
 
                     _ => throw new InvalidOperationException($"Tipo de denuncio no soportado: {command.Request.GetType().Name}")
                 };
