@@ -2,6 +2,7 @@
 using ICore.Siniestro.Aplicacion.Comandos;
 using ICore.Siniestro.Aplicacion.Consultas;
 using ICore.Siniestro.Aplicacion.Dtos.Requests;
+using ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio;
 using ICore.Siniestro.Aplicacion.Dtos.Requests.Soap;
 using ICore.Siniestro.Aplicacion.Dtos.Responses;
 using ICore.Siniestro.Aplicacion.Dtos.Responses.Soap;
@@ -140,6 +141,25 @@ namespace ICore.Siniestro.Api.Controllers
             var respuesta = await _mediator.Send(crear);
 
             return ObtenerRespuesta(respuesta);
+        }
+
+        /// <summary>
+        /// Crea un denuncio de siniestro unificado en Tia
+        /// </summary>
+        /// <param name="request">Datos del denuncio de siniestro</param>
+        /// <returns>Respuesta con el resultado de la creacion del siniestro</returns>
+        [HttpPost]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ApiOkResponse<SiniestroPropuestoResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Crear([FromBody] DenuncioSiniestroRequest request)
+        {
+            var crear = new CrearDenuncioSiniestroCommand
+            {
+                Request = request
+            };
+            var resultado = await _mediator.Send(crear);
+            return ObtenerRespuesta(resultado);
         }
     }
 }
