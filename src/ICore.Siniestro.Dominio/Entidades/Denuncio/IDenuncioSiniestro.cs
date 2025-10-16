@@ -5,6 +5,6 @@ namespace ICore.Siniestro.Dominio.Entidades.Denuncio
     public interface IDenuncioSiniestro
     {
         TipoSiniestro TipoSiniestro { get; }
-        Siniestro Siniestro { get; set; }
+        Soporte.Siniestro Siniestro { get; set; }
     }
 }

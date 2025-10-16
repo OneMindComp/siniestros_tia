@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ICore.Siniestro.Aplicacion.Contratos.Persistencia;
+using ICore.Siniestro.Dominio.Entidades.Denuncio;
 using ICore.Siniestro.Dominio.Entidades.Falabella;
 using ICore.Siniestro.Dominio.Entidades.Soap;
 using Microsoft.Extensions.Logging;
@@ -350,6 +351,114 @@ namespace ICore.Siniestro.Infraestructura.TiaClaims.Implemetacion
                 throw new InfraestructureException(ex.Message);
             }
 
+        }
+
+        public async Task<SiniestroPropuesto> CrearSiniestro(DenuncioSoap denuncio)
+        {
+            try
+            {
+                var transactionAction1 = new TransactionAction_TransControl
+                {
+                    Action = TransactionAction_TransControlAction.Custom_Action,
+                    Values = new List<TransactionValue_TransControl>
+                    {
+                        new TransactionValue_TransControl{Name = "action", Value = "PRE_OP.LOOKUP_OBJECT" },
+                        new TransactionValue_TransControl{Name = "policyNoAlt", Value = denuncio.Poliza.NumeroPoliza },
+                        new TransactionValue_TransControl{Name = "objectId", Value = denuncio.Vehiculo.Patente },
+                        new TransactionValue_TransControl{Name = "incidentDate", Value = denuncio.Siniestro.Fecha.ToString("yyyy-MM-dd") }
+                    }
+
+                };
+
+                var transactionAction2 = new TransactionAction_TransControl
+                {
+                    Action = TransactionAction_TransControlAction.New_Event,
+                    Values = new List<TransactionValue_TransControl>
+                    {
+                        new TransactionValue_TransControl{Name = "eventType", Value = "ACC" },
+                        new TransactionValue_TransControl{Name = "causeType", Value = "OTR" },
+                        new TransactionValue_TransControl{Name = "incidentDate", Value = denuncio.Siniestro.Fecha.ToString("yyyy-MM-dd") },
+                        new TransactionValue_TransControl{Name = "isExactIncidentDate", Value =  "N"},
+                        new TransactionValue_TransControl{Name = "placeType", Value = "ROA"},
+                        new TransactionValue_TransControl{Name = "address", Value = denuncio.Siniestro.Direccion}
+                    }
+
+                };
+
+                var transactionAction3 = new TransactionAction_TransControl
+                {
+                    Action = TransactionAction_TransControlAction.New_Case,
+                    Values = new List<TransactionValue_TransControl>
+                    {
+                        new TransactionValue_TransControl{Name = "informerType", Value = "IP" },
+                        new TransactionValue_TransControl{Name = "informerName", Value = string.Concat(denuncio.Denunciante.Nombre)},
+                        new TransactionValue_TransControl{Name = "notificationDate", Value = DateTime.Now.ToString("yyyy-MM-dd") },
+                        new TransactionValue_TransControl{Name = "status", Value =  "NO"},
+                        new TransactionValue_TransControl{Name = "lossOfBonus", Value = "N"},
+                        new TransactionValue_TransControl{Name = "description", Value = denuncio.Siniestro.Relato},
+                        new TransactionValue_TransControl{Name = "riskNo", Value =  "105"},// 101/103/105/125
+                        new TransactionValue_TransControl{Name = "subriskNo", Value = "0"},
+                        new TransactionValue_TransControl{Name = "filedBy", Value = "INT"}
+                    }
+
+                };
+
+                if (denuncio.Siniestro.NumeroPartePolicial != null)
+                {
+                    transactionAction3.Values.Add(new TransactionValue_TransControl { Name = "c08", Value = "Y" });// Campo: Y=Con Parte Policial / N=Sin Parte Policial
+                    transactionAction3.Values.Add(new TransactionValue_TransControl { Name = "c27", Value = denuncio.Siniestro.NumeroPartePolicial.ToString() });
+                }
+                else
+                {
+                    transactionAction3.Values.Add(new TransactionValue_TransControl { Name = "c08", Value = "N" });
+                }
+
+                transactionAction3.Values.Add(new TransactionValue_TransControl { Name = "c24", Value = denuncio.Denunciante.Rut });
+                transactionAction3.Values.Add(new TransactionValue_TransControl { Name = "c25", Value = denuncio.Denunciante.Correo });
+                transactionAction3.Values.Add(new TransactionValue_TransControl { Name = "c26", Value = denuncio.Denunciante.Telefono });
+           
+
+                
+
+                
+
+                var transCollection = new TransactionRequest_TransControl
+                {
+                    Actions = [
+                         transactionAction1,
+                         transactionAction2,
+                         transactionAction3
+                        ]
+                };
+
+                //Sólo se requiere si el lesionado no es el contratante.
+                if (denuncio.Lesionado!=null&&(denuncio.Denunciante.Rut != denuncio.Lesionado.Rut))
+                {
+                    transCollection.Actions.Add(new TransactionAction_TransControl
+                    {
+                        Action = TransactionAction_TransControlAction.Custom_Action,
+                        Values = new List<TransactionValue_TransControl>
+                        {
+                            new TransactionValue_TransControl{Name = "action", Value = "CUSTOM.ADD_THIRD_PARTY" },
+                            new TransactionValue_TransControl{Name = "civilRegistrationCode", Value = denuncio.Lesionado.Rut},
+                            new TransactionValue_TransControl{Name = "name", Value =denuncio.Lesionado.NombreCompleto },
+                            new TransactionValue_TransControl{Name = "type", Value = "INJ"}
+                        }
+                    });
+                }
+
+                var response = await _tiaClaimsApi.V1PerformTransactionAsync(transCollection);
+
+                var responseData = response.Content;
+                var respuesta = SiniestroPropuesto.Crear(numeroSiniestro: responseData.ClaimEventNo);
+
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Hubo un error en siniestro implementacion");
+                throw new InvalidOperationException("No se pudo crear siniestro.", ex);
+            }
         }
     }
 }

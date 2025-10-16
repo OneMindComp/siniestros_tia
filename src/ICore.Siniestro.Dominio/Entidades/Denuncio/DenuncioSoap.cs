@@ -1,25 +1,24 @@
-﻿using ICore.Siniestro.Dominio.Entidades.Denuncio.Soporte;
-using ICore.Siniestro.Dominio.Enumeradores;
+﻿using ICore.Siniestro.Dominio.Enumeradores;
 
 namespace ICore.Siniestro.Dominio.Entidades.Denuncio
 {
     public class DenuncioSoap : DenuncioSiniestro
     {
         public override TipoSiniestro TipoSiniestro => TipoSiniestro.SOAP;
-        public Poliza Poliza { get; private set; } = default!;
-        public Denunciante Denunciante { get; private set; } = default!;
-        public Vehiculo Vehiculo { get; private set; } = default!;
-        public Conductor Conductor { get; private set; } = default!;
-        public Lesionado? Lesionado { get; private set; }
+        public Soporte.Poliza Poliza { get; private set; } = default!;
+        public Soporte.Denunciante Denunciante { get; private set; } = default!;
+        public Soporte.Vehiculo Vehiculo { get; private set; } = default!;
+        public Soporte.Conductor Conductor { get; private set; } = default!;
+        public Soporte.Lesionado? Lesionado { get; private set; }
         private DenuncioSoap()
         {
         }
         private DenuncioSoap(
-        Poliza poliza,
-        Denunciante denunciante,
-        Vehiculo vehiculo,
-        Conductor conductor,
-        Lesionado? lesionado)
+        Soporte.Poliza poliza,
+        Soporte.Denunciante denunciante,
+        Soporte.Vehiculo vehiculo,
+        Soporte.Conductor conductor,
+        Soporte.Lesionado? lesionado)
         {
             Poliza = poliza;
             Denunciante = denunciante;
@@ -28,11 +27,11 @@ namespace ICore.Siniestro.Dominio.Entidades.Denuncio
             Lesionado = lesionado;
         }
         public static DenuncioSoap Crear(
-        Poliza poliza,
-        Denunciante denunciante,
-        Vehiculo vehiculo,
-        Conductor conductor,
-        Lesionado? lesionado = null)
+        Soporte.Poliza poliza,
+        Soporte.Denunciante denunciante,
+        Soporte.Vehiculo vehiculo,
+        Soporte.Conductor conductor,
+        Soporte.Lesionado? lesionado = null)
         {
             return new DenuncioSoap(poliza, denunciante, vehiculo, conductor, lesionado);
         }

@@ -109,6 +109,13 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="M:ICore.Siniestro.Api.Controllers.SiniestroController.Crear(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest)">
+            <summary>
+            Crea un denuncio de siniestro unificado en Tia
+            </summary>
+            <param name="request">Datos del denuncio de siniestro</param>
+            <returns>Respuesta con el resultado de la creacion del siniestro</returns>
+        </member>
         <member name="T:ICore.Siniestro.Api.Extensiones.ControllerServiceExtension">
             <summary>
             Configuracion para el uso de controladores.

@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
-using ICore.Siniestro.Aplicacion.Contratos.Core;
+using ICore.Siniestro.Aplicacion.Contratos.Persistencia;
 using ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio;
-using ICore.Siniestro.Aplicacion.Dtos.Requests.Soap;
 using ICore.Siniestro.Aplicacion.Dtos.Responses.Soap;
+using ICore.Siniestro.Aplicacion.Mapeadores;
 using ICore.Siniestro.Aplicacion.Servicios;
-using ICore.Siniestro.Dominio.Entidades;
-using ICore.Siniestro.Dominio.Entidades.Soap;
-using ICore.Siniestro.Infraestructura.TiaParty;
+using ICore.Siniestro.Dominio.Entidades.Denuncio;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Sbins.Lib.DateTimeManager;
 
 namespace ICore.Siniestro.Aplicacion.Comandos
 {
@@ -38,9 +35,8 @@ namespace ICore.Siniestro.Aplicacion.Comandos
         /// </summary>
         /// <param name="siniestro"></param>
         /// <param name="mapper"></param>
-        /// <param name="partyClient"></param>
         /// <param name="logger"></param>
-        public CrearDenuncioSiniestroCommandHandler(ISiniestroContract siniestro, IMapper mapper, ITiaPartyClient partyClient, ILogger<CrearDenuncioSiniestroCommandHandler> logger)
+        public CrearDenuncioSiniestroCommandHandler(ISiniestroContract siniestro, IMapper mapper, ILogger<CrearDenuncioSiniestroCommandHandler> logger)
         {
             _siniestro = siniestro;
             _mapper = mapper;
@@ -63,15 +59,21 @@ namespace ICore.Siniestro.Aplicacion.Comandos
 
                 if (errores.Count > 0)
                 {
-                    return Resultado<SiniestroPropuestoResponse>.Fallo(errores);
+                    throw new InvalidOperationException($"Errores de validacion: {string.Join(", ", errores)}");
                 }
 
-                var response = request.Request switch
-                {
-                    DenuncioSoapRequest soap => await ProcesarSOAP(soap, cancellationToken),
+                object response;
 
-                    _ => throw new InvalidOperationException($"Tipo de denuncio no soportado: {command.Request.GetType().Name}")
-                };
+                switch (request.Request)
+                {
+                    case DenuncioSoapRequest soap:
+                        DenuncioSoap denuncio = DenuncioSoapMapper.MapearDesdeRequest(soap);
+                        response = await _siniestro.CrearSiniestro(denuncio);
+                        break;
+
+                    default:
+                        throw new InvalidOperationException($"Tipo de denuncio no soportado: {request.Request.GetType().Name}");
+                }
                 var respuesta = _mapper.Map<SiniestroPropuestoResponse>(response);
 
                 return respuesta;
@@ -85,60 +87,6 @@ namespace ICore.Siniestro.Aplicacion.Comandos
             }
         }
 
-        private static SiniestroSoap MapSiniestroSoap(SiniestroSoapRequest input, long institucionSaludId)
-        {
 
-            Dominio.Entidades.Soap.Poliza poliza = Dominio.Entidades.Soap.Poliza.Crear(
-                numeroPoliza: input.NumeroPoliza
-                );
-            Vehiculo vehiculo = Vehiculo.Crear(
-                patente: input.Patente
-                );
-            Contratante contratante = Contratante.Crear(
-                numeroDocumento: input.RutContratante,
-                nombre: input.NombreContratante
-                );
-            Lesionado lesionado = Lesionado.Crear(
-                numeroDocumento: input.RutLesionado,
-                nombre: input.NombreLesionado
-                );
-            PartePolicial parte = null!;
-            if (input.NumeroParte > 0)
-            {
-                parte = PartePolicial.Crear(
-                fecha: DateTimeParse.ParseToDateTimeUTC(input.FechaParte),
-                numero: input.NumeroParte
-                );
-            }
-            InstitucionSalud institucionSalud = InstitucionSalud.Crear(
-                rut: input.RutInstitucionSalud,
-                nombre: input.NombreInstitucionSalud,
-                codigoInterno: input.NumeroInterno!
-                );
-            if (institucionSaludId > 0)
-            {
-                institucionSalud.setId(institucionSaludId);
-            }
-            Factura factura = Factura.Crear(
-                numeroFactura: input.NumeroFactura,
-                montoBruto: input.MontoBruto,
-                iva: input.Iva,
-                montoNeto: input.MontoNeto
-                );
-            SiniestroSoap soap = SiniestroSoap.Crear(
-                fecha: DateTimeParse.ParseToDateTimeUTC(input.Fecha),
-                tipoEvento: input.TipoEvento,
-                controlador: input.Controlador,
-                liquidador: input.Liquidador,
-                poliza: poliza,
-                vehiculo: vehiculo,
-                contratante: contratante,
-                lesionado: lesionado,
-                parte: parte,
-                institucionSalud: institucionSalud,
-                factura: factura
-                );
-            return soap;
-        }
     }
 }

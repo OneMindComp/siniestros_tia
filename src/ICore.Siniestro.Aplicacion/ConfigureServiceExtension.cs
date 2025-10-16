@@ -1,4 +1,7 @@
-﻿using ICore.Siniestro.Aplicacion.Validaciones;
+﻿using ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio;
+using ICore.Siniestro.Aplicacion.Servicios;
+using ICore.Siniestro.Aplicacion.Validaciones;
+using ICore.Siniestro.Dominio.Entidades.Denuncio;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -21,7 +24,9 @@ namespace ICore.Siniestro.Aplicacion
             services.AddMediatR(configuration =>
                 configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
             );
-
+            services.AddScoped<IValidacionDenuncios, ValidacionDenuncios>();
+            services.AddScoped<IDenuncioSiniestro, DenuncioSiniestro>();
+            services.AddScoped<Interfaces.IDenuncioSiniestro, DenuncioSiniestroRequest>();
             services.AddValidationExtension();
 
             return services;
