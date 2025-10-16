@@ -348,51 +348,55 @@
             Datos del siniestro
             </summary>
         </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest.ObtenerValidador">
-            <summary>
-            Obtiene el validador apropiado para este tipo de denuncio
-            </summary>
-        </member>
-        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest">
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest">
             <summary>
             Denuncio de siniestro SOAP (vehiculos)
             </summary>
         </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest.TipoSiniestro">
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest.TipoSiniestro">
             <summary>
             tipo de siniestro
             </summary>
         </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest.Poliza">
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest.Poliza">
             <summary>
             Informacion de la poliza
             </summary>
         </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest.Denunciante">
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest.Denunciante">
             <summary>
             Informacion del denunciante
             </summary>
         </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest.Vehiculo">
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest.Vehiculo">
             <summary>
             Informacion del vehiculo
             </summary>
         </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest.Conductor">
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest.Conductor">
             <summary>
             Informacion del conductor
             </summary>
         </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest.Lesionado">
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest.Lesionado">
             <summary>
             Informacion del lesionado si aplica
             </summary>
         </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest.ObtenerValidador">
+        <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.IDenuncioSiniestroRequest">
             <summary>
-            
+            Contrato base para todos los denuncios de siniestro
             </summary>
-            <returns></returns>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.IDenuncioSiniestroRequest.TipoSiniestro">
+            <summary>
+            Tipo de siniestro
+            </summary>
+        </member>
+        <member name="P:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.IDenuncioSiniestroRequest.Siniestro">
+            <summary>
+            Datos del siniestro
+            </summary>
         </member>
         <member name="T:ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.Soporte.AseguradoRequest">
             <summary>
@@ -1719,39 +1723,12 @@
             Numero de caso.
             </summary>
         </member>
-        <member name="T:ICore.Siniestro.Aplicacion.Interfaces.IDenuncioSiniestro">
-            <summary>
-            Contrato base para todos los denuncios de siniestro
-            </summary>
-        </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Interfaces.IDenuncioSiniestro.TipoSiniestro">
-            <summary>
-            Tipo de siniestro
-            </summary>
-        </member>
-        <member name="P:ICore.Siniestro.Aplicacion.Interfaces.IDenuncioSiniestro.Siniestro">
-            <summary>
-            Datos del siniestro
-            </summary>
-        </member>
-        <member name="T:ICore.Siniestro.Aplicacion.Interfaces.IValidadorSiniestro">
-            <summary>
-            Contrato para validadores de siniestros
-            </summary>
-        </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Interfaces.IValidadorSiniestro.Validar(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest)">
-            <summary>
-            Valida un denuncio de siniestro
-            </summary>
-            <param name="denuncio">Denuncio a validar</param>
-            <returns>Lista de errores de validacion</returns>
-        </member>
         <member name="T:ICore.Siniestro.Aplicacion.Mapeadores.DenuncioSoapMapper">
             <summary>
             Clase para mapear DenuncioSoapRequest a DenuncioSoap
             </summary>
         </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Mapeadores.DenuncioSoapMapper.MapearDesdeRequest(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSoapRequest)">
+        <member name="M:ICore.Siniestro.Aplicacion.Mapeadores.DenuncioSoapMapper.MapearDesdeRequest(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroSoapRequest)">
             <summary>
             Mapea un DenuncioSoapRequest a una entidad DenuncioSoap usando los metodos Crear de cada clase
             </summary>
@@ -1799,28 +1776,6 @@
             Constructor.
             </summary>
         </member>
-        <member name="T:ICore.Siniestro.Aplicacion.Servicios.IValidacionDenuncios">
-            <summary>
-            Contrato para el servicio de validacion de denuncios
-            </summary>
-        </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Servicios.IValidacionDenuncios.Validar(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest)">
-            <summary>
-            Valida un denuncio usando su validador especifico
-            </summary>
-            <param name="denuncio"></param>
-            <returns></returns>
-        </member>
-        <member name="T:ICore.Siniestro.Aplicacion.Servicios.ValidacionDenuncios">
-            <summary>
-            Servicio para validar denuncios utilizando el patron apropiado
-            </summary>
-        </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Servicios.ValidacionDenuncios.Validar(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest)">
-            <summary>
-            Valida un denuncio usando su validador especifico
-            </summary>
-        </member>
         <member name="T:ICore.Siniestro.Aplicacion.Validaciones.SiniestroSoapValidacion">
             <summary>
             Clase de configuracion fluent validation SiniestroSoapRequest.
@@ -1840,35 +1795,6 @@
             <summary>
             Constructor declara los servicios de fluet validation.
             </summary>
-        </member>
-        <member name="T:ICore.Siniestro.Aplicacion.Validaciones.ValidadorBase">
-            <summary>
-            Validador base con logica comun
-            </summary>
-        </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Validaciones.ValidadorBase.Validar(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest)">
-            <summary>
-            validador comun a todos los tipos de denuncio
-            </summary>
-            <param name="denuncio"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Validaciones.ValidadorBase.ValidarEspecifico(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest,System.Collections.Generic.List{System.String})">
-            <summary>
-            Validacion especifica por tipo de denuncio
-            </summary>
-        </member>
-        <member name="T:ICore.Siniestro.Aplicacion.Validaciones.ValidadorSOAP">
-            <summary>
-            Validador para denuncios SOAP
-            </summary>
-        </member>
-        <member name="M:ICore.Siniestro.Aplicacion.Validaciones.ValidadorSOAP.ValidarEspecifico(ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.DenuncioSiniestroRequest,System.Collections.Generic.List{System.String})">
-            <summary>
-            valida los campos especificos para denuncios SOAP
-            </summary>
-            <param name="denuncio"></param>
-            <param name="errores"></param>
         </member>
     </members>
 </doc>

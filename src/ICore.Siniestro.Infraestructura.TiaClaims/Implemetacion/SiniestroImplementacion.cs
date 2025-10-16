@@ -353,7 +353,7 @@ namespace ICore.Siniestro.Infraestructura.TiaClaims.Implemetacion
 
         }
 
-        public async Task<SiniestroPropuesto> CrearSiniestro(DenuncioSoap denuncio)
+        public async Task<SiniestroPropuesto> CrearSiniestro(DenuncioSiniestroSoap denuncio)
         {
             try
             {

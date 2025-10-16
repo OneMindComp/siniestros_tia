@@ -14,7 +14,7 @@ namespace ICore.Siniestro.Aplicacion.Mapeadores
         /// </summary>
         /// <param name="request">Request con los datos del denuncio</param>
         /// <returns>Entidad de dominio DenuncioSoap</returns>
-        public static DenuncioSoap MapearDesdeRequest(DenuncioSoapRequest request)
+        public static DenuncioSiniestroSoap MapearDesdeRequest(DenuncioSiniestroSoapRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -53,7 +53,7 @@ namespace ICore.Siniestro.Aplicacion.Mapeadores
                 );
             }
 
-            return DenuncioSoap.Crear(
+            return DenuncioSiniestroSoap.Crear(
                 poliza: poliza,
                 denunciante: denunciante,
                 vehiculo: vehiculo,

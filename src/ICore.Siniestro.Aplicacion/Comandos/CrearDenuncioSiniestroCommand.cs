@@ -3,8 +3,8 @@ using ICore.Siniestro.Aplicacion.Contratos.Persistencia;
 using ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio;
 using ICore.Siniestro.Aplicacion.Dtos.Responses.Soap;
 using ICore.Siniestro.Aplicacion.Mapeadores;
-using ICore.Siniestro.Aplicacion.Servicios;
 using ICore.Siniestro.Dominio.Entidades.Denuncio;
+using ICore.Siniestro.Dominio.Entidades.Soap;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -26,7 +26,6 @@ namespace ICore.Siniestro.Aplicacion.Comandos
     public class CrearDenuncioSiniestroCommandHandler : IRequestHandler<CrearDenuncioSiniestroCommand, SiniestroPropuestoResponse>
     {
         private readonly ISiniestroContract _siniestro;
-        private readonly IValidacionDenuncios _validacionDenuncios;
         private readonly IMapper _mapper;
         private readonly ILogger<CrearDenuncioSiniestroCommandHandler> _logger;
 
@@ -55,19 +54,19 @@ namespace ICore.Siniestro.Aplicacion.Comandos
             {
                 _logger.LogInformation("Se inicia el metodo CrearDenuncioSiniestroCommand ");
 
-                var errores = _validacionDenuncios.Validar(request.Request);
+                //var errores = _validacionDenuncios.Validar(request.Request);
 
-                if (errores.Count > 0)
-                {
-                    throw new InvalidOperationException($"Errores de validacion: {string.Join(", ", errores)}");
-                }
+                //if (errores.Count > 0)
+                //{
+                //    throw new InvalidOperationException($"Errores de validacion: {string.Join(", ", errores)}");
+                //}
 
-                object response;
+                SiniestroPropuesto response;
 
                 switch (request.Request)
                 {
-                    case DenuncioSoapRequest soap:
-                        DenuncioSoap denuncio = DenuncioSoapMapper.MapearDesdeRequest(soap);
+                    case DenuncioSiniestroSoapRequest soap:
+                        DenuncioSiniestroSoap denuncio = DenuncioSoapMapper.MapearDesdeRequest(soap);
                         response = await _siniestro.CrearSiniestro(denuncio);
                         break;
 

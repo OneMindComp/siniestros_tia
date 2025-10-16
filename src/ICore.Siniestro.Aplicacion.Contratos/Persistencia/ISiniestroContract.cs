@@ -5,7 +5,7 @@ namespace ICore.Siniestro.Aplicacion.Contratos.Persistencia
 {
     public interface ISiniestroContract
     {
-        Task<SiniestroPropuesto> CrearSiniestro(DenuncioSoap denuncio);
+        Task<SiniestroPropuesto> CrearSiniestro(DenuncioSiniestroSoap denuncio);
         Task<SiniestroPropuesto> CrearSiniestroSoap(SiniestroSoap siniestro);
         Task<SiniestroPropuesto> CrearSiniestroFalabella(Dominio.Entidades.Falabella.Siniestro siniestro);
         Task<SiniestroPropuesto> EnviarCourierFalabella(Dominio.Entidades.Falabella.Courier courier);

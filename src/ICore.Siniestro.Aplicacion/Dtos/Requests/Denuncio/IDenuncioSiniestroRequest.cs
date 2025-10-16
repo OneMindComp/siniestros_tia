@@ -1,12 +1,12 @@
 ﻿using ICore.Siniestro.Aplicacion.Dtos.Requests;
 using ICore.Siniestro.Dominio.Enumeradores;
 
-namespace ICore.Siniestro.Aplicacion.Interfaces
+namespace ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio
 {
     /// <summary>
     /// Contrato base para todos los denuncios de siniestro
     /// </summary>
-    public interface IDenuncioSiniestro
+    public interface IDenuncioSiniestroRequest
     {
         /// <summary>
         /// Tipo de siniestro
@@ -16,6 +16,6 @@ namespace ICore.Siniestro.Aplicacion.Interfaces
         /// <summary>
         /// Datos del siniestro
         /// </summary>
-        Dtos.Requests.Denuncio.Soporte.SiniestroRequest Siniestro { get; set; }
+        Soporte.SiniestroRequest Siniestro { get; set; }
     }
 }

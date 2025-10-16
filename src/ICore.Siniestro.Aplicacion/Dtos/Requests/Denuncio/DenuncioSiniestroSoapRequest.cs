@@ -1,6 +1,4 @@
 ﻿using ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio.Soporte;
-using ICore.Siniestro.Aplicacion.Interfaces;
-using ICore.Siniestro.Aplicacion.Validaciones;
 using ICore.Siniestro.Dominio.Enumeradores;
 
 namespace ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio
@@ -8,7 +6,7 @@ namespace ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio
     /// <summary>
     /// Denuncio de siniestro SOAP (vehiculos)
     /// </summary>
-    public class DenuncioSoapRequest : DenuncioSiniestroRequest
+    public class DenuncioSiniestroSoapRequest : DenuncioSiniestroRequest
     {
         /// <summary>
         /// tipo de siniestro
@@ -40,10 +38,5 @@ namespace ICore.Siniestro.Aplicacion.Dtos.Requests.Denuncio
         /// </summary>
         public LesionadoRequest? Lesionado { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override IValidadorSiniestro ObtenerValidador() => new ValidadorSOAP();
     }
 }
