@@ -149,6 +149,7 @@ namespace ICore.Siniestro.Api.Controllers
         /// <param name="request">Datos del denuncio de siniestro</param>
         /// <returns>Respuesta con el resultado de la creacion del siniestro</returns>
         [HttpPost]
+        [Route("denuncio")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ApiOkResponse<SiniestroPropuestoResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]

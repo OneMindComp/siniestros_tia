@@ -25,10 +25,10 @@ namespace ICore.Siniestro.Aplicacion
                 configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
             );
             services.AddScoped<IValidacionDenuncios, ValidacionDenuncios>();
-            services.AddScoped<IDenuncioSiniestro, DenuncioSiniestro>();
-            services.AddScoped<Interfaces.IDenuncioSiniestro, DenuncioSiniestroRequest>();
+            //services.AddScoped<IDenuncioSiniestro, DenuncioSiniestro>();
+            //services.AddScoped<Interfaces.IDenuncioSiniestro, DenuncioSiniestroRequest>();
             services.AddValidationExtension();
-
+            
             return services;
         }
     }
